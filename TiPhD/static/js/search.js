@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // 根据表名获取对应的字段列表
 function getFieldsByTableName(tableName) {
     if (tableName === 'celltype') {
-        return ['main_cancer_type','cancer_type', 'big_cell_type','major_cell_type', 'Phenotype_type', 'main_Phenotype_label','Phenotype_label'];
+        return ['major_cancer_type','cancer_type', 'major_cell_type','cell_type', 'Phenotype_type', 'major_Phenotype_label','Phenotype_label'];
     } else if (tableName === 'spatiallayer') {
-        return ['main_cancer_type','cancer_type', 'main_spatial_layer', 'spatial_layer', 'Phenotype_type', 'main_Phenotype_label','Phenotype_label'];
+        return ['major_cancer_type','cancer_type', 'major_spatial_layer', 'spatial_layer', 'Phenotype_type', 'major_Phenotype_label','Phenotype_label'];
     }
     return [];
 }
@@ -203,12 +203,12 @@ function displayResults(data, tableName) {
 
     // 定义字段顺序
     const fieldOrder = tableName === "celltype" ? [
-        'CTID', 'PMID', 'Paper_Title', 'main_Phenotype_label','Phenotype_label', 'Phenotype_type',
-        'cancer_type', 'big_cell_type','major_cell_type','cell_name', 'journal',  'species',
+        'CTID', 'PMID', 'Paper_Title', 'major_Phenotype_label','Phenotype_label', 'Phenotype_type',
+        'cancer_type', 'major_cell_type','cell_type','cell_name', 'journal',  'species',
         'tissue_class', 'year'
     ] : [
-        'SLID', 'PMID', 'Paper_Title', 'main_Phenotype_label','Phenotype_label', 'Phenotype_type',
-        'cancer_type', 'spatial_layer',  'Cell_type_composition','journal', 'main_spatial_layer','species',
+        'SLID', 'PMID', 'Paper_Title', 'major_Phenotype_label','Phenotype_label', 'Phenotype_type',
+        'cancer_type', 'spatial_layer',  'Cell_type_composition','journal', 'major_spatial_layer','species',
         'tissue_class', 'year'
     ];
 

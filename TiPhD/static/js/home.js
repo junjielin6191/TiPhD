@@ -149,8 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { category: "Paper Number", count: 177 },
         { category: "Cancer Type", count: 25 },
         { category: "Cell Type", count: 233 },
-        { category: "Clinical Phenotype", count: 221 },
-        { category: "Biological Phenotype", count: 140 }
+        { category: "Clinical Phenotype evidence", count: 221 },
+        { category: "Biological phenotype evidence", count: 140 }
     ];
   
     // Spatial Structure 表格数据
@@ -158,8 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { category: "Paper Number", count: 54 },
         { category: "Cancer Type", count: 20 },
         { category: "Spatial Layer", count: 71 },
-        { category: "Clinical Phenotype", count: 31 },
-        { category: "Biological Phenotype", count: 44 }
+        { category: "Clinical Phenotype evidence", count: 31 },
+        { category: "Biological phenotype evidence", count: 44 }
     ];
   
     // 获取表格 body 的 DOM 元素

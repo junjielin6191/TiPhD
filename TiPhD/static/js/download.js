@@ -1,6 +1,6 @@
 // 定义字段顺序
 const CELLTYPE_FIELDS = [
-    "CTID", "species", "tissue_class", "cancer_type", "major_cell_type", 
+    "CTID", "species", "tissue_class", "cancer_type", "major_cell_type", "cell_type",
     "cell_name", "Phenotype_type", "Phenotype_label", "Paper_Title", "journal", "year","PMID"
 
 ];

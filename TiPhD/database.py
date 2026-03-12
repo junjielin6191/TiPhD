@@ -23,10 +23,10 @@ class SpatialLayer(Base):
     species = Column(String)
     tissue_class = Column(String)
     tissue_type = Column(String)
-    main_cancer_type = Column(String)
+    major_cancer_type = Column(String)
     cancer_type = Column(String)
     cancer_type_detail = Column(String)
-    main_spatial_layer = Column(String)
+    major_spatial_layer = Column(String)
     spatial_layer = Column(String)
     Cell_type_composition = Column(String)
     PMID = Column(Integer)
@@ -36,7 +36,7 @@ class SpatialLayer(Base):
     technology_type_for_discovery = Column(String)
     technology_platform_for_discovery = Column(String)
     Phenotype_type = Column(String)
-    main_Phenotype_label = Column(String)
+    major_Phenotype_label = Column(String)
     Phenotype_label = Column(String)
     model_type = Column(String)
     technology_type_for_validation = Column(String)
@@ -58,11 +58,11 @@ class CellType(Base):
     species = Column(String)
     tissue_class = Column(String)
     tissue_type = Column(String)
-    main_cancer_type = Column(String)
+    major_cancer_type = Column(String)
     cancer_type = Column(String)
     cancer_type_detail = Column(String)
-    big_cell_type = Column(String)
     major_cell_type = Column(String)
+    cell_type = Column(String)
     cell_name = Column(String)
     cell_marker = Column(String)  # 对应表头的 cell_marker
     PMID = Column(Integer)
@@ -72,7 +72,7 @@ class CellType(Base):
     technology_type_for_discovery = Column(String)
     technology_platform_for_discovery = Column(String)
     Phenotype_type = Column(String)
-    main_Phenotype_label = Column(String)
+    major_Phenotype_label = Column(String)
     Phenotype_label = Column(String)
     Association_Type = Column(String)  # 新增：对应表头字段
     model_type = Column(String)
@@ -90,13 +90,13 @@ SPATIALLAYER_FIELDS = {
         "species", 
         "tissue_class", 
         "tissue_type", 
-        "main_cancer_type", 
+        "major_cancer_type", 
         "cancer_type", 
         "cancer_type_detail"
     ],
     "spatial_info": [
         "SLID", 
-        "main_spatial_layer", 
+        "major_spatial_layer", 
         "spatial_layer", 
         "Cell_type_composition"
     ],
@@ -116,7 +116,7 @@ SPATIALLAYER_FIELDS = {
     ],
     "phenotype_info": [
         "Phenotype_type", 
-        "main_Phenotype_label", 
+        "major_Phenotype_label", 
         "Phenotype_label", 
         "Phenotype_evidence"
     ],
@@ -127,14 +127,14 @@ CELLTYPE_FIELDS = {
         "species", 
         "tissue_class", 
         "tissue_type", 
-        "main_cancer_type", 
+        "major_cancer_type", 
         "cancer_type", 
         "cancer_type_detail"
     ],
     "cell_info": [
         "CTID", 
-        "big_cell_type", 
         "major_cell_type", 
+        "cell_type", 
         "cell_name", 
         "cell_marker"
     ],
@@ -154,7 +154,7 @@ CELLTYPE_FIELDS = {
     ],
     "phenotype_info": [
         "Phenotype_type", 
-        "main_Phenotype_label", 
+        "major_Phenotype_label", 
         "Phenotype_label", 
         "Association_Type",  # 加入了关联类型
         "Phenotype_evidence"

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<div class="agent-container">
+    <aside class="chat-sidebar">
+        <button id="new-chat-btn" class="new-chat-btn">
+            <span class="icon">+</span> New Chat
+        </button>
+        <div class="chat-history-list" id="chat-history-list">
+            <div class="history-item active">Current Session</div>
+            </div>
+    </aside>
+
+    <main class="chat-main">
+        <div class="chat-messages" id="chat-messages">
+            <div class="message system-msg">
+                <div class="avatar-container">
+                    <img src="{{ url_for('static', filename='logo.png') }}" alt="TiAgent" class="avatar">
+                </div>
+                <div class="msg-content">
+                    Hello! I am <strong>TiAgent</strong>, your multimodal research assistant. <br>
+                    You can ask me about spatial transcriptomics, literature evidence, or request experimental protocols.
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <div class="input-wrapper">
+                <textarea id="chat-input" placeholder="Ask TiAgent a question..." rows="1"></textarea>
+                <button id="send-btn" class="send-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="disclaimer">TiAgent can make mistakes. Consider verifying important biological information.</div>
+        </div>
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/agent.js') }}"></script>
+{% endblock %}

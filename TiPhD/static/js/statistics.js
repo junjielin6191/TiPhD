@@ -71,17 +71,17 @@ function renderCharts(data, tableName) {
             );
         }
 
-        // Main Cancer Type Chart
-        if (data["main cancer type"]) {
+        // major cancer type Chart
+        if (data["major cancer type"]) {
             Plotly.newPlot(
                 "main-cancer-type-chart",
                 [
                     {
-                        x: Object.keys(data["main cancer type"]),
-                        y: Object.values(data["main cancer type"]),
+                        x: Object.keys(data["major cancer type"]),
+                        y: Object.values(data["major cancer type"]),
                         type: "bar",
                         marker: {
-                            color: getRandomColors(Object.keys(data["main cancer type"]).length), // 生成随机颜色
+                            color: getRandomColors(Object.keys(data["major cancer type"]).length), // 生成随机颜色
                         },                        
                     },
                 ],
@@ -165,17 +165,17 @@ function renderCharts(data, tableName) {
             );
         }
     
-        // Main Cancer Type Chart
-        if (data["main cancer type"]) {
+        // major cancer type Chart
+        if (data["major cancer type"]) {
             Plotly.newPlot(
                 "main-cancer-type-chart",
                 [
                     {
-                        x: Object.keys(data["main cancer type"]),
-                        y: Object.values(data["main cancer type"]),
+                        x: Object.keys(data["major cancer type"]),
+                        y: Object.values(data["major cancer type"]),
                         type: "bar",
                         marker: {
-                            color: getRandomColors(Object.keys(data["main cancer type"]).length), // 生成随机颜色
+                            color: getRandomColors(Object.keys(data["major cancer type"]).length), // 生成随机颜色
                         }, 
                     },
                 ],
