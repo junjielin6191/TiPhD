@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistics - {{ table_name | capitalize }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Statistics for {{ table_name | capitalize }}</h2>
+
+    <!-- 第一行 -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div id="main-cancer-type-chart"></div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div id="cells-type-chart"></div>
+            <div id="spatial-layer-chart"></div>
+        </div>
+
+    </div>
+
+    <!-- 第二行 -->
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+            <div id="phenotype-label-chart"></div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div id="phenotype-type-chart"></div>
+        </div>
+    </div>
+
+    <!-- 第三行 -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div id="heatmap-chart"></div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/statistics.js') }}"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/statistics.css') }}">
+<script>
+    const tableName = "{{ table_name }}";
+    loadStatistics(tableName);
+</script>
+{% endblock %}

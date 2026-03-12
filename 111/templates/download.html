@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Download Page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Cell Type 数据表格 -->
+    <div class="section-container">
+        <h2>Information of datasets in <span style="color: #009da1;">cell type</span></h2>
+        <table id="cellTypeTable" class="table table-striped" style="width:100%">
+            <thead>
+                <tr id="cellTableHeader"></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- Spatial Layer 数据表格 -->
+    <div class="section-container">
+        <h2>Information of datasets in <span style="color: lightcoral;">spatial layer</span></h2>
+        <table id="spatialLayerTable" class="table table-striped" style="width:100%">
+            <thead>
+                <tr id="spatialTableHeader"></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 引入所需的 CSS 和 JavaScript 文件 -->
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<!-- DataTables 核心库 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Buttons 插件 -->
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+
+<!-- JSZip (用于导出 CSV/Excel 文件) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+<!-- 引入自定义的 download.js 文件 -->
+<script src="{{ url_for('static', filename='js/download.js') }}"></script>
+
+{% endblock %}

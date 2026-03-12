@@ -1,0 +1,81 @@
+/* 整体容器样式 */
+.details-container {
+    margin: 20px auto;
+    max-width: 900px;
+    font-family: Arial, sans-serif;
+}
+
+/* 表格样式 */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 表头样式 */
+.styled-table th {
+    background-color: #2F5373; /* 表头背景颜色 */
+    color: white; /* 字体颜色 */
+    padding: 10px;
+    font-size: 16px;
+    text-transform: capitalize; /* 首字母大写 */
+    text-align: center;
+}
+
+/* 左侧字段名称单元格 */
+.styled-table td:first-child {
+  /*     font-weight: normal;改为 normal 或直接删除这行 */
+    text-align: center;
+    padding: 10px;
+    width: 30%; /* 左侧列宽 */
+    word-wrap: break-word;
+    white-space: normal;
+    background-color: #fff;
+    color: #333;
+    text-transform: capitalize; /* 首字母大写 */
+}
+
+/* 右侧内容单元格 */
+.styled-table td:last-child {
+    text-align: center;
+    padding: 12px;
+    word-wrap: break-word;
+    white-space: normal;
+    background-color: #fff;
+    color: #333;
+}
+
+/* 奇数行背景色 */
+.styled-table tbody tr:nth-child(odd) td:last-child {
+    background-color: #f4f4f4; /* 奇数行内容背景颜色 */
+}
+.styled-table tbody tr:nth-child(odd) td:first-child {
+    background-color: #f4f4f4; /* 奇数行内容背景颜色 */
+}
+/* 行 hover 效果 */
+.styled-table tbody tr:hover td {
+    background-color: #e6f7ff; /* 鼠标悬停效果 */
+}
+
+/* 分类标题行样式 */
+.styled-table tr th[colspan="2"] {
+    background-color: #2F5373;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: center;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+    .styled-table td, .styled-table th {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

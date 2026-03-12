@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- 第一部分：文本 -->
+    <div style="font-family: Arial, sans-serif; max-width: 1000px; margin: auto; padding: 40px; line-height: 1.6; color: #333333;">
+        <!-- 标题 -->
+        <h1 style="color: #00274d; font-size: 2rem; font-weight: bold; text-align: center; margin-bottom: 40px; margin-top: 0px;">
+            TiPhD: an intelligent knowledgebase of tumor microenvironment with phenotype
+        </h1>
+        <p style="text-align: center; font-size: 1.1rem; color: #444444;">
+            A framework for understanding the tumor microenvironment and its role in cancer research.
+        </p>
+    <!-- 第二部分：统计信息 -->    
+        <h2 class="text-center my-5"><strong>Statistical <span style="color: #00274d;">Information</span></strong></h2>    
+        <div class="statistical-container">
+            <div id="statistical-cell-container">
+                <h3>
+                    <img src="/static/home/cell_type.png" alt="Cell Type Image" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 10px;">
+                    Cell Type
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cell-table-body">
+                        <!-- 动态生成 cell 数据 -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="statistical-spatial-container">
+                <h3>
+                    <img src="/static/home/spatial_layer.png" alt="Spatial Layer Image" style="width: 70px; height: 50px; vertical-align: middle; margin-right: 10px;">
+                    Spatial Layer
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody id="spatial-table-body">
+                        <!-- 动态生成 spatial 数据 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    
+    
+    
+
+
+
+    <!-- 第二部分:phenotype and cancer 按钮 -->
+    <div class="flex-container">
+        <div id="cancer-section"></div>
+        <div id="tme-container"></div>
+    </div>
+
+      
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}

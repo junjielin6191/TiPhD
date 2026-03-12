@@ -1,0 +1,117 @@
+/* home */
+
+/* 肿瘤微环境 */
+.flex-container {
+    display: flex;
+    justify-content: space-between; /* 左右均匀分布 */
+    align-items: center; /* 垂直居中 */
+    height: 100vh;          /* 父容器全屏高度 */
+    gap: 100px;              /* 子元素之间的间距 */
+    position: relative;
+}
+
+#cancer-section, #tme-container {
+    margin: 0;
+    padding: 30px;
+}
+
+#tme-container {
+    transform: scale(0.8); /* 放大比例 */
+    width:600px;
+    height:600px;
+    transform-origin: center center; /* 放大中心 */
+}
+
+#cancer-section {
+    transform: scale(0.7); /* 缩小比例 */
+    width:500px;
+    height:700px;
+    transform-origin: center center; /* 缩小中心 */
+}
+
+#cancer-section div {
+    position: absolute;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+    transform: translateY(-8px); 
+}
+
+
+.statistical-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    margin: auto;
+    max-width: 1200px;
+    font-family: Arial, sans-serif;
+}
+
+.statistical-container div {
+    flex: 1; /* 两部分占据相等的宽度 */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+  
+
+
+
+
+/* 主容器，固定尺寸 */
+.circle-container {
+    position: relative;
+    width: 600px; /* 主容器宽度 */
+    height: 600px; /* 主容器高度 */
+    margin: 0 auto;
+    border-radius: 50%; /* 环形布局 */
+}
+
+/* 中心的 tumor 图像 */
+.circle-container .center-item {
+    position: absolute;
+    width: 3in; /* 设置中心图片宽度 */
+    height: 3in; /* 设置中心图片高度 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* 环绕的其他图像 */
+.circle-container .ring-item {
+    position: absolute;
+    width: 1.97in; /* 设置环绕图片宽度 */
+    height: 1.97in; /* 设置环绕图片高度 */
+    transform-origin: center;
+}
+
+/* 环绕图像样式 */
+.ring-item img {
+    width: 100%; /* 确保图片自适应大小 */
+    height: 100%;
+    object-fit: contain; /* 保持图片比例 */
+}

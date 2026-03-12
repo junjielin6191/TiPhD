@@ -1,0 +1,73 @@
+
+
+/* 卡片基础样式 */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease-in-out; /* 鼠标悬浮时放大动画 */
+}
+
+.card:hover {
+    transform: scale(1.05); /* 鼠标悬浮时放大 */
+}
+
+/* 悬浮内容样式 */
+.card-img-overlay {
+    background-color: rgba(211, 211, 211, 0.8); /* 浅灰色背景，透明度80% */
+    opacity: 0; /* 初始隐藏 */
+    color: #333; /* 字体颜色为深灰色 */
+    transition: opacity 0.3s ease-in-out; /* 添加平滑过渡效果 */
+    text-align: center;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 鼠标悬浮时显示内容 */
+.hover-card:hover .card-img-overlay {
+    opacity: 1; /* 显示内容 */
+}
+
+/* 链接样式 */
+.hover-link {
+    color: #007bff; /* 蓝色链接 */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.hover-link:hover {
+    color: #0056b3; /* 深蓝色 */
+    text-decoration: underline;
+}
+
+/* 标题样式 */
+.card-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 悬浮文字内容 */
+.hover-text {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+
+
+
+
+

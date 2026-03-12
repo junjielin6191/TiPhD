@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}browse - {{ table_name | capitalize }}{% endblock %}
+
+{% block content %}
+<div class="browse-container">
+    <!-- 表格 -->
+    <div class="table-container">
+        <table class="styled-table">
+            <thead>
+                <tr id="table-header"></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- 分页控件 -->
+    <div class="pagination-controls">
+        <button id="prev-page" class="btn pagination-btn">Previous</button>
+        <span id="pagination-info">Page 1 of 1</span>
+        <button id="next-page" class="btn pagination-btn">Next</button>
+    </div>
+    
+    <!-- 错误信息 -->
+    <div id="error-message" style="display: none; color: red;">Failed to load data. Please try again.</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/browse.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/browse.css') }}">
+<script>
+    // 初始化表格名称
+    let tableName = "{{ table_name }}";
+
+    // 页面加载时，调用 JS 函数，加载相应的表格数据
+    document.addEventListener('DOMContentLoaded', () => {
+        loadbrowse(tableName); // 加载对应表格的数据
+    });
+</script>
+{% endblock %}

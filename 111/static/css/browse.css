@@ -1,0 +1,129 @@
+/* ------------------------------------browse */
+/* 表格容器 */
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto; /* 横向滚动支持 */
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 表格样式 */
+.styled-table {
+    width: 200%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    text-align: center;
+    table-layout: fixed; /* 固定布局，确保列宽按CSS定义生效 */
+}
+
+/* 表头样式 */
+.styled-table th {
+    background-color: #2F5373; /* 表头背景色 */
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    position: sticky;
+    top: 0; /* 固定表头 */
+    text-align: center; /* 居中 */
+    z-index: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* 单元格样式 */
+.styled-table td {
+    padding: 10px;
+    border: 1px solid #ddd; /* 单元格边框 */
+    text-align: center; /* 左对齐 */
+    vertical-align: top; /* 内容顶部对齐 */
+}
+
+.styled-table th:nth-child(10), /* 第9列（Phenotype Evidence） */
+.styled-table td:nth-child(10){    
+    width: 15%; /* 分配宽度 */
+    max-width: 1000px; /* 设置最大宽度 */
+    overflow: hidden; /* 超出部分隐藏 */
+    word-wrap: break-word; /* 自动换行 */
+    white-space: normal; /* 允许多行显示 */
+    text-align: left; /* 左对齐 */
+}
+.styled-table th:nth-child(9), /* 第9列（Phenotype Evidence） */
+.styled-table th:nth-child(9) {
+    width: 25%; /* 分配宽度 */
+    max-width: 1000px; /* 设置最大宽度 */
+    overflow: hidden; /* 超出部分隐藏 */
+    word-wrap: break-word; /* 自动换行 */
+    white-space: normal; /* 允许多行显示 */
+    text-align: left; /* 左对齐 */
+}
+
+/* 表格行固定最小高度 */
+.styled-table tbody tr {
+    min-height: 50px; /* 设置最小高度 */
+}
+
+/* 偶数行背景 */
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* 偶数行背景色 */
+}
+
+/* 鼠标悬停行背景 */
+.styled-table tbody tr:hover {
+    background-color: #e0e0e0; /* 鼠标悬停背景色 */
+    transition: background-color 0.3s ease;
+}
+
+/* 响应式样式 */
+@media screen and (max-width: 768px) {
+    .styled-table th:nth-child(9), /* 隐藏第9列 */
+    .styled-table td:nth-child(9),
+    .styled-table th:nth-child(10), /* 隐藏第10列 */
+    .styled-table td:nth-child(10) {
+        display: none;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        font-size: 12px; /* 缩小字体 */
+        padding: 8px; /* 减小内边距 */
+    }
+}
+
+/*分页按钮*/
+/* 分页控件容器 */
+.pagination-controls {
+    display: flex;
+    justify-content: space-between; /* 按钮和分页信息两边对齐 */
+    align-items: center; /* 垂直居中 */
+    margin: 20px 0; /* 上下间距 */
+    padding: 0 20px; /* 两侧内边距 */
+}
+
+/* 分页按钮样式 */
+.pagination-btn {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background-color: #2F5373; /* 按钮背景色 */
+    color: white; /* 按钮文字颜色 */
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex: 0; /* 防止按钮扩展宽度 */
+}
+
+/* 禁用按钮样式 */
+.pagination-btn:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc; /* 禁用背景色 */
+    color: #666; /* 禁用文字颜色 */
+}
+
+/* 分页信息样式 */
+.pagination-controls span {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    text-align: center; /* 居中对齐 */
+    flex-grow: 1; /* 填充中间空间 */
+}

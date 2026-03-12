@@ -1,0 +1,182 @@
+[
+    {
+        "db_id": 1,
+        "chunk_id": "EX_82daa002",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Spatial Transcriptomics Analysis",
+        "Methodology": "10x Genomics Visium",
+        "Purpose": "Map spatial distribution of tumor, immune, and stromal cells",
+        "Key_Analyses": "Co-localization indices, spatial distances, correlation with phenotypes"
+    },
+    {
+        "db_id": 2,
+        "chunk_id": "EX_4766d1fa",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Immunohistochemistry (IHC) & Immunofluorescence",
+        "Methodology": "IHC, fluorescence microscopy",
+        "Purpose": "Investigate cell interactions in tumor cores, margins, and metastases",
+        "Key_Analyses": "Quantification of co-localization, correlation with metastasis and immune evasion"
+    },
+    {
+        "db_id": 3,
+        "chunk_id": "EX_b8781db3",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Mouse Tumor Model Experiments",
+        "Methodology": "Fluorescent labeling in vivo",
+        "Purpose": "Monitor real-time co-localization and treatment effects",
+        "Key_Analyses": "Assess immune infiltration changes, therapy impact on immune escape"
+    },
+    {
+        "db_id": 4,
+        "chunk_id": "EX_b3c96d1c",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Survival Analysis with Clinical Data",
+        "Methodology": "Kaplan-Meier, regression analysis",
+        "Purpose": "Correlate co-localization with patient prognosis",
+        "Key_Analyses": "Relationship between co-localization, metastasis, and therapy resistance"
+    },
+    {
+        "db_id": 5,
+        "chunk_id": "EX_a51dfc16",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Laser Capture Microdissection + RNA-seq",
+        "Methodology": "LCM, RNA-seq",
+        "Purpose": "Compare gene expression in co-localized vs non-co-localized regions",
+        "Key_Analyses": "Identify immune escape and immunosuppressive gene activation"
+    },
+    {
+        "db_id": 6,
+        "chunk_id": "EX_c69001bb",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Gene Editing (CRISPR/shRNA)",
+        "Methodology": "CRISPR knockout of stroma-related genes",
+        "Purpose": "Evaluate stromal structure influence on co-localization",
+        "Key_Analyses": "Tumor growth, immune cell invasion, and therapy resistance assessment"
+    },
+    {
+        "db_id": 7,
+        "chunk_id": "EX_9550c1d2",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "In Situ Hybridization (FISH/RNAScope)",
+        "Methodology": "RNA/DNA probes",
+        "Purpose": "Detect gene expression co-localization",
+        "Key_Analyses": "Verify tumor-stromal gene associations"
+    },
+    {
+        "db_id": 8,
+        "chunk_id": "EX_70cd4218",
+        "Spatiallayer": "Cell Co-Localization",
+        "Experimental_Design": "Flow Cytometry or CyTOF",
+        "Methodology": "Multi-parameter cell sorting",
+        "Purpose": "Functional validation of co-localized cells",
+        "Key_Analyses": "Phenotypic and functional analysis of immune-tumor interactions"
+    },
+    {
+        "db_id": 9,
+        "chunk_id": "EX_be3cbc5c",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "Single-Cell RNA Sequencing (scRNA-seq)",
+        "Methodology": "scRNA-seq",
+        "Purpose": "Identify ligand-receptor interactions",
+        "Key_Analyses": "Construct tumor immune microenvironment communication networks"
+    },
+    {
+        "db_id": 10,
+        "chunk_id": "EX_cdf11863",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "Protein Interaction Validation",
+        "Methodology": "Co-IP + LC-MS/MS, PLA",
+        "Purpose": "Confirm direct protein interactions",
+        "Key_Analyses": "Validate ligand-receptor signaling pathways"
+    },
+    {
+        "db_id": 11,
+        "chunk_id": "EX_dd7917e8",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "In Vitro Functional Validation",
+        "Methodology": "Transwell assay",
+        "Purpose": "Analyze direct vs indirect cell interactions",
+        "Key_Analyses": "Study cytokine/chemokine-mediated effects on tumors"
+    },
+    {
+        "db_id": 12,
+        "chunk_id": "EX_fbbd04aa",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "Genetic Intervention in Co-Culture",
+        "Methodology": "CRISPR knockout in co-culture",
+        "Purpose": "Examine impact of signaling disruptions",
+        "Key_Analyses": "Effects on immune response, proliferation, and drug resistance"
+    },
+    {
+        "db_id": 13,
+        "chunk_id": "EX_38481098",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "Cell Interaction Experiments in Mouse Models",
+        "Methodology": "Tumor cell & immune cell tracking",
+        "Purpose": "Assess dynamic cell behavior",
+        "Key_Analyses": "Influence of interactions on immune response and drug efficacy"
+    },
+    {
+        "db_id": 14,
+        "chunk_id": "EX_f8b80588",
+        "Spatiallayer": "Cell-Cell Interactions",
+        "Experimental_Design": "Exosome-Mediated Interaction Verification",
+        "Methodology": "Exosome isolation, tracking",
+        "Purpose": "Analyze exosome-mediated signaling",
+        "Key_Analyses": "Study migration and drug resistance changes"
+    },
+    {
+        "db_id": 15,
+        "chunk_id": "EX_b8fc20cd",
+        "Spatiallayer": "Cellular Communities",
+        "Experimental_Design": "Spatial Transcriptomics + ML Clustering",
+        "Methodology": "Louvain clustering",
+        "Purpose": "Identify tumor immune niches",
+        "Key_Analyses": "Explore community-based immune responses"
+    },
+    {
+        "db_id": 16,
+        "chunk_id": "EX_7ae0202c",
+        "Spatiallayer": "Cellular Communities",
+        "Experimental_Design": "3D Tumor-Immune-Stromal Co-Culture Models",
+        "Methodology": "3D co-culture systems",
+        "Purpose": "Study tumor-stromal-immune interactions",
+        "Key_Analyses": "Analyze immune escape, invasion, and proliferation"
+    },
+    {
+        "db_id": 17,
+        "chunk_id": "EX_ca4ceb6d",
+        "Spatiallayer": "Cellular Communities",
+        "Experimental_Design": "Organoid Co-Culture Systems",
+        "Methodology": "Tumor-immune organoid models",
+        "Purpose": "Examine effects of immune communities",
+        "Key_Analyses": "Impact on immune infiltration and tumor growth"
+    },
+    {
+        "db_id": 18,
+        "chunk_id": "EX_cab32c77",
+        "Spatiallayer": "Cellular Communities",
+        "Experimental_Design": "Immune Niche Reconstruction in Mice",
+        "Methodology": "Cell mixture implantation",
+        "Purpose": "Assess tumor immune escape mechanisms",
+        "Key_Analyses": "Impact of immune communities on therapy response"
+    },
+    {
+        "db_id": 19,
+        "chunk_id": "EX_64609c05",
+        "Spatiallayer": "Microanatomical Structures",
+        "Experimental_Design": "3D Structural and Functional Analysis",
+        "Methodology": "Tissue clearing, confocal imaging",
+        "Purpose": "Investigate stromal barriers",
+        "Key_Analyses": "Impact of ECM degradation on immune infiltration"
+    },
+    {
+        "db_id": 20,
+        "chunk_id": "EX_3df0c459",
+        "Spatiallayer": "Microanatomical Structures",
+        "Experimental_Design": "Gene Editing + Immunotherapy",
+        "Methodology": "CRISPR knockout + PD-1 inhibitors",
+        "Purpose": "Enhance immune penetration",
+        "Key_Analyses": "Evaluate combination therapy efficacy"
+    }
+]

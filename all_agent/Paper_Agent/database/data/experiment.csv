@@ -1,0 +1,21 @@
+﻿Spatiallayer,Experimental Design,Methodology,Purpose,Key Analyses
+Cell Co-Localization,Spatial Transcriptomics Analysis,10x Genomics Visium,"Map spatial distribution of tumor, immune, and stromal cells","Co-localization indices, spatial distances, correlation with phenotypes"
+Cell Co-Localization,Immunohistochemistry (IHC) & Immunofluorescence,"IHC, fluorescence microscopy","Investigate cell interactions in tumor cores, margins, and metastases","Quantification of co-localization, correlation with metastasis and immune evasion"
+Cell Co-Localization,Mouse Tumor Model Experiments,Fluorescent labeling in vivo,Monitor real-time co-localization and treatment effects,"Assess immune infiltration changes, therapy impact on immune escape"
+Cell Co-Localization,Survival Analysis with Clinical Data,"Kaplan-Meier, regression analysis",Correlate co-localization with patient prognosis,"Relationship between co-localization, metastasis, and therapy resistance"
+Cell Co-Localization,Laser Capture Microdissection + RNA-seq,"LCM, RNA-seq",Compare gene expression in co-localized vs non-co-localized regions,Identify immune escape and immunosuppressive gene activation
+Cell Co-Localization,Gene Editing (CRISPR/shRNA),CRISPR knockout of stroma-related genes,Evaluate stromal structure influence on co-localization,"Tumor growth, immune cell invasion, and therapy resistance assessment"
+Cell Co-Localization,In Situ Hybridization (FISH/RNAScope),RNA/DNA probes,Detect gene expression co-localization,Verify tumor-stromal gene associations
+Cell Co-Localization,Flow Cytometry or CyTOF,Multi-parameter cell sorting,Functional validation of co-localized cells,Phenotypic and functional analysis of immune-tumor interactions
+Cell-Cell Interactions,Single-Cell RNA Sequencing (scRNA-seq),scRNA-seq,Identify ligand-receptor interactions,Construct tumor immune microenvironment communication networks
+Cell-Cell Interactions,Protein Interaction Validation,"Co-IP + LC-MS/MS, PLA",Confirm direct protein interactions,Validate ligand-receptor signaling pathways
+Cell-Cell Interactions,In Vitro Functional Validation,Transwell assay,Analyze direct vs indirect cell interactions,Study cytokine/chemokine-mediated effects on tumors
+Cell-Cell Interactions,Genetic Intervention in Co-Culture,CRISPR knockout in co-culture,Examine impact of signaling disruptions,"Effects on immune response, proliferation, and drug resistance"
+Cell-Cell Interactions,Cell Interaction Experiments in Mouse Models,Tumor cell & immune cell tracking,Assess dynamic cell behavior,Influence of interactions on immune response and drug efficacy
+Cell-Cell Interactions,Exosome-Mediated Interaction Verification,"Exosome isolation, tracking",Analyze exosome-mediated signaling,Study migration and drug resistance changes
+Cellular Communities,Spatial Transcriptomics + ML Clustering,Louvain clustering,Identify tumor immune niches,Explore community-based immune responses
+Cellular Communities,3D Tumor-Immune-Stromal Co-Culture Models,3D co-culture systems,Study tumor-stromal-immune interactions,"Analyze immune escape, invasion, and proliferation"
+Cellular Communities,Organoid Co-Culture Systems,Tumor-immune organoid models,Examine effects of immune communities,Impact on immune infiltration and tumor growth
+Cellular Communities,Immune Niche Reconstruction in Mice,Cell mixture implantation,Assess tumor immune escape mechanisms,Impact of immune communities on therapy response
+Microanatomical Structures,3D Structural and Functional Analysis,"Tissue clearing, confocal imaging",Investigate stromal barriers,Impact of ECM degradation on immune infiltration
+Microanatomical Structures,Gene Editing + Immunotherapy,CRISPR knockout + PD-1 inhibitors,Enhance immune penetration,Evaluate combination therapy efficacy

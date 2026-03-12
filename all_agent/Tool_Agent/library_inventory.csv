@@ -1,0 +1,203 @@
+Name,Type,Description
+ABSOLUTE,General/Other,"A cancer CNV analysis software developed by the Broad Institute, essentially an R package, which can quantify the absolute copy number of cells, tumor purity, and ploidy. If mutation data is provided, it can also explore clones and subclones."
+Alleloscope,General/Other,a method for allele-specific copy number estimation that can be applied to single cell DNA and ATAC sequencing data (separately or in combination). 
+BASIC,General/Other,BASIC: BCR and TCR assembly from single cell RNA-seq
+BattenBerg,General/Other,Battenberg R package for subclonal copynumber estimation
+BayesPrism,General/Other,Bayesian cell Proportion Reconstruction Inferred using Statistical Marginalization (BayesPrism): A Fully Bayesian Inference of Tumor Microenvironment composition and gene expression
+Bisque,General/Other,An R toolkit for estimation of cell composition from bulk expression data
+BraCeR,General/Other,reconstruction of B cell receptor sequences from single-cell RNA-seq data.
+B-SCITE,General/Other,is a software package to compute trees of tumor evolution by integrative use of single-cell and bulk sequencing data
+CellAssign,General/Other,automatically assigns single-cell RNA-seq data to known cell types across thousands of cells accounting for patient and batch specific effects.
+CellChat,General/Other,enables the inferrence of cell-cell communication from multiple spatially resolved transcriptomics datasets.
+CellPhoneDB,General/Other,"a publicly available repository of HUMAN curated receptors, ligands and their interactions paired with a tool to interrogate your own single-cell transcriptomics data"
+CIBERSORT,General/Other,"CIBERSORT is an analytical tool to impute gene expression profiles and provide an estimation of the abundances of member cell types in a mixed cell population, using gene expression data."
+CIBERSORTx,General/Other,"an analytical tool from the Alizadeh Lab and Newman Lab to impute gene expression profiles and provide an estimation of the abundances of member cell types in a mixed cell population, using gene expression data."
+CloudNeo,General/Other,A cloud pipeline for identifying patient-specific tumor neoantigens
+CONICS,General/Other,COpy-Number analysis In single-Cell RNA-Sequencing
+ConsensusTME,General/Other,The ConsensusTME package provides a integrative tool for R that uses a consensus approach to generating cancer specific signatures for multiple cell types found within the tumour environment.
+CPE,General/Other,"Consensus Purity Estimation (CPE) is a method for determining tumor purity, based on a comprehensive assessment of ABSOLUTE, ESTIMATE, LUMP, and IHC."
+Enclone,General/Other,VDJ Clonotyping & Analysis Tools
+EPIC,General/Other,"Repository for the R package EPIC, to Estimate the Proportion of Immune and Cancer cells from bulk gene expression data."
+ESTIMATE,General/Other,"provides researchers with scores for tumor purity, the level of stromal cells present, and the infiltration level of immune cells in tumor tissues based on expression data"
+FastClone,General/Other,"a fast algorithm to infer tumour heterogeneity. Given somatic mutation frequencies and copy number data, FastClone infers subclonal composition and phylogeny."
+Harmony,General/Other,A method for integrating and analyzing single-cell data across datasets. Use with subprocess calls.
+HATCHet,General/Other,"An R package for tumor genome analysis, particularly for estimating tumor purity and copy number variation (CNV)."
+IGoR,General/Other,IGoR is a C++ software designed to infer V(D)J recombination related processes from sequencing data. 
+Immunarch,General/Other,an R Package for Fast and Painless Exploration of Single-cell and Bulk T-cell/Antibody Immune Repertoires
+ImmunoMAP,General/Other,Structural TCR Repertoire Analytics Package
+ImReP,General/Other,ImReP is a computational method for rapid and accurate profiling of the adaptive immune repertoire from regular RNA-Seq data.
+ImSig,General/Other,Immune Cell Gene Signatures for Profiling the Microenvironment of Solid Tumours
+inferCNV,General/Other,Inferring CNV from Single-Cell RNA-Seq
+LiRA,General/Other,a computational tool for removing amplification artifacts from single-cell DNA sequencing data and estimating mutation rates in single cells. 
+LUMP,General/Other,LUMP defines tumor purity based on tumor-specific unmethylated immune CpG sites.
+MARS,General/Other,reads a structural multiple RNA alignment (e.g. from LaRA) and derives fuzzy stem loop descriptors from it. 
+MCP-counter,General/Other,"a tool to estimate the immune and stromal composition of heterogeneous tissue, from transcriptomic data"
+methylCIBERSORT,General/Other,an algorithm the author developed in order to adapt the state-of-the-art CIBERSORT algorithm to the deconvolution of methylation data. 
+MIXCR,General/Other,MiXCR is a universal software for fast and accurate analysis of raw T- or B- cell receptor repertoire sequencing data.
+Monocle,General/Other,Monocle is an R package for analyzing single-cell RNA-Seq experiments.
+Monovar,General/Other,Single nucleotide variant (SNV) detection and genotyping algorithm for single-cell DNA sequencing data
+MuSiC,General/Other,Multi-subject Single Cell Deconvolution
+NeoFuse,General/Other,NeoFuse is a user-friendly pipeline for the prediction of fusion neoantigens from tumor RNA-seq data.
+nextNEOpi,General/Other,a comprehensive pipeline for computational neoantigen prediction
+PAGA,General/Other,Mapping out the coarse-grained connectivity structures of complex manifolds.
+PIC-seq,General/Other,"PIC-seq, combines cell sorting of physically interacting cells (PICs) with scRNA-seq and computational modelling to profile cellular interactions and their impact on gene expression."
+pTuneos,General/Other,prioritizing Tumor neoantigen from next-generation sequencing data
+pVAC-Seq,General/Other,a cancer immunotherapy suite consisting of the following tools: pVACseq. A cancer immunotherapy pipeline for identifying and prioritizing neoantigens from a VCF file.
+PyClone,General/Other,Probabilistic model for inferring clonal population structure from deep NGS sequencing.
+qpure,General/Other,a compact and fast method for predicting tumor purity (cancer cell fraction) from bulk gene expression data. 
+quanTIseq,General/Other,a computational pipeline for the quantification of the Tumor Immune contexture from human RNA-seq data
+Scaden,General/Other,Deep Learning based cell composition analysis with Scaden.
+ScanNeo,General/Other,A pipeline for identifying indel derived neoantigens using RNA-Seq data
+SCARLET,General/Other,an algorithm that reconstructs tumor phylogenies from single-cell DNA sequencing data.
+SCCAF,General/Other,Single-Cell Clustering Assessment Framework
+SCcaller,General/Other,Single Cell Caller (SCcaller) - Identify single nucleotide variations (SNVs) from single cell sequencing data
+SCENIC,General/Other,a method to infer Gene Regulatory Networks and cell types from single-cell RNA-seq data.
+SciClone,General/Other,An R package for inferring the subclonal architecture of tumors
+SCORPIUS,General/Other,Linear trajectory inference for single-cell RNA-seq
+scPred,General/Other,package for cell type prediction from scRNA-seq data
+Seurat,General/Other,R toolkit for single cell genomics
+SingleR,General/Other,Single-cell RNA-seq cell types Recognition (legacy version)
+Slingshot,General/Other,Functions for identifying and characterizing continuous developmental trajectories in single-cell data.
+SSCAF,General/Other,Single-Cell Clustering Assessment Framework
+TIMER,General/Other,a tool for systematical evaluations of the clinical impact of different immune cells in diverse cancer types.
+TRUST4,General/Other,TCR and BCR assembly from RNA-seq data
+TSNAD,General/Other,Detecting somatic mutations and predicting tumor-specific neo-antigens
+VDJtools,General/Other,Post-analysis of immune repertoire sequencing data
+xCell,General/Other,Cell types enrichment analysis
+Beyondeell,[R Package],"Beyondcell is a methodology for the identification of drug vulnerabilities in single-cell RNA-seq (scRNA-seq) and Spatial Transcriptomics (ST) data. To this end, beyondcell focuses on the analysis of drug-related commonalities between cells/spots by classifying them into distinct Therapeutic Clusters (TCs)."
+Scissor,[R Package],"Scissor is a novel approach that utilizes the phenotypes, such as disease stage, tumor metastasis, treatment response, and survival outcomes, collected from bulk assays to identify the most highly phenotype-associated cell subpopulations from single-cell data."
+scDEAL,[Python Package],Deep Transfer Learning of Drug Sensitivity by Integrating Bulk and Single-cell RNA-seq data
+DEGAS,[R Package],Diagnostic Evidence GAuge of Single cells (DEGAS): A flexible deep transfer learning framework for prioritizing cells in relation to disease
+TiRank,[Python Package],TiRank integrates bulk RNA‐seq with single-cell or spatial transcriptomics to identify phenotype-associated regions or cell clusters.
+CytoCommunity,[Python Package],CytoCommunity is used for identifying TCNs that can be applied in either unsupervised or weakly-supervised fashion.
+SpaPheno,[R Package],"SpaPheno, an interpretable machine learning framework that integrates spatial transcriptomics with clinically annotated bulk RNA-seq data to uncover spatially resolved biomarkers predictive of patient outcomes."
+scPER,[R Package],"scPER, which stands for Proportions Estimated using single-cell RNA-seq Reference, can robustly estimate the relative compositions of cells and their subtypes within the tumor microenvironment and identify phenotype-associated subclusters."
+biopython,[Python Package],"A set of tools for biological computation including parsers for bioinformatics files, access to online services, and interfaces to common bioinformatics programs."
+biom-format,[Python Package],The Biological Observation Matrix (BIOM) format is designed for representing biological sample by observation contingency tables with associated metadata.
+scanpy,[Python Package],"A scalable toolkit for analyzing single-cell gene expression data, specifically designed for large datasets using AnnData."
+scikit-bio,[Python Package],"Data structures, algorithms, and educational resources for bioinformatics, including sequence analysis, phylogenetics, and ordination methods."
+anndata,[Python Package],"A Python package for handling annotated data matrices in memory and on disk, primarily used for single-cell genomics data."
+mudata,[Python Package],"A Python package for multimodal data storage and manipulation, extending AnnData to handle multiple modalities."
+pyliftover,[Python Package],A Python implementation of UCSC liftOver tool for converting genomic coordinates between genome assemblies.
+biopandas,[Python Package],A package that provides pandas DataFrames for working with molecular structures and biological data.
+biotite,[Python Package],"A comprehensive library for computational molecular biology, providing tools for sequence analysis, structure analysis, and more."
+lazyslide,[Python Package],"A Python framework that brings interoperable, reproducible whole slide image analysis, enabling seamless histopathology workflows from preprocessing to deep learning."
+gget,[Python Package],"A toolkit for accessing genomic databases and retrieving sequences, annotations, and other genomic data."
+lifelines,[Python Package],"A complete survival analysis library for fitting models, plotting, and statistical tests."
+scvi-tools,[Python Package],"A package for probabilistic modeling of single-cell omics data, including deep generative models."
+gseapy,[Python Package],A Python wrapper for Gene Set Enrichment Analysis (GSEA) and visualization.
+scrublet,[Python Package],A tool for detecting doublets in single-cell RNA-seq data.
+cellxgene-census,[Python Package],"A tool for accessing and analyzing the CellxGene Census, a collection of single-cell datasets. To download a dataset, use the download_source_h5ad function with the dataset id as the argument (856c1b98-5727-49da-bf0f-151bdb8cb056, no .h5ad extension)."
+hyperopt,[Python Package],A Python library for optimizing hyperparameters of machine learning algorithms.
+scvelo,[Python Package],A tool for RNA velocity analysis in single cells using dynamical models.
+pysam,[Python Package],"A Python module for reading, manipulating and writing genomic data sets in SAM/BAM/VCF/BCF formats."
+pyfaidx,[Python Package],A Python package for efficient random access to FASTA files.
+pyranges,[Python Package],A Python package for interval manipulation with a pandas-like interface.
+pybedtools,[Python Package],A Python wrapper for Aaron Quinlan's BEDTools programs.
+panhumanpy,General/Other,"A Python package for hierarchical, cross-tissue cell type annotation of human single-cell RNA-seq data"
+rdkit,[Python Package],A collection of cheminformatics and machine learning tools for working with chemical structures and drug discovery.
+deeppurpose,[Python Package],A deep learning library for drug-target interaction prediction and virtual screening.
+pyscreener,[Python Package],A Python package for virtual screening of chemical compounds.
+openbabel,[Python Package],"A chemical toolbox designed to speak the many languages of chemical data, supporting file format conversion and molecular modeling."
+descriptastorus,[Python Package],A library for computing molecular descriptors for machine learning applications in drug discovery.
+pymol,[Python Package],A molecular visualization system for rendering and animating 3D molecular structures.
+openmm,[Python Package],A toolkit for molecular simulation using high-performance GPU computing.
+pytdc,[Python Package],"A Python package for Therapeutics Data Commons, providing access to machine learning datasets for drug discovery."
+pandas,[Python Package],"A fast, powerful, and flexible data analysis and manipulation library for Python."
+numpy,[Python Package],"The fundamental package for scientific computing with Python, providing support for arrays, matrices, and mathematical functions."
+scipy,[Python Package],"A Python library for scientific and technical computing, including modules for optimization, linear algebra, integration, and statistics."
+scikit-learn,[Python Package],"A machine learning library featuring various classification, regression, and clustering algorithms."
+matplotlib,[Python Package],"A comprehensive library for creating static, animated, and interactive visualizations in Python."
+seaborn,[Python Package],A statistical data visualization library based on matplotlib with a high-level interface for drawing attractive statistical graphics.
+statsmodels,[Python Package],"A Python module for statistical modeling and econometrics, including descriptive statistics and estimation of statistical models."
+pymc3,[Python Package],A Python package for Bayesian statistical modeling and probabilistic machine learning.
+pystan,[Python Package],"A Python interface to Stan, a platform for statistical modeling and high-performance statistical computation."
+umap-learn,[Python Package],"Uniform Manifold Approximation and Projection, a dimension reduction technique."
+faiss-cpu,[Python Package],A library for efficient similarity search and clustering of dense vectors.
+harmony-pytorch,[Python Package],A PyTorch implementation of the Harmony algorithm for integrating single-cell data.
+tiledb,[Python Package],A powerful engine for storing and analyzing large-scale genomic data.
+tiledbsoma,[Python Package],A library for working with the SOMA (Stack of Matrices) format using TileDB.
+h5py,[Python Package],"A Python interface to the HDF5 binary data format, allowing storage of large amounts of numerical data."
+tqdm,[Python Package],"A fast, extensible progress bar for loops and CLI applications."
+joblib,[Python Package],"A set of tools to provide lightweight pipelining in Python, including transparent disk-caching and parallel computing."
+opencv-python,[Python Package],"OpenCV library for computer vision tasks, useful for image analysis in biological contexts."
+PyPDF2,[Python Package],"A library for working with PDF files, useful for extracting text from scientific papers."
+googlesearch-python,[Python Package],A library for performing Google searches programmatically.
+scikit-image,[Python Package],A collection of algorithms for image processing in Python.
+pymed,[Python Package],A Python library for accessing PubMed articles.
+arxiv,[Python Package],"A Python wrapper for the arXiv API, allowing access to scientific papers."
+scholarly,[Python Package],A module to retrieve author and publication information from Google Scholar.
+cryosparc-tools,[Python Package],"Tools for working with cryoSPARC, a platform for cryo-EM data processing."
+mageck,[Python Package],Analysis of CRISPR screen data.
+igraph,[Python Package],Network analysis and visualization.
+pyscenic,[Python Package],Analysis of single-cell RNA-seq data and gene regulatory networks.
+cooler,[Python Package],Storage and analysis of Hi-C data.
+trackpy,[Python Package],Particle tracking in images and video.
+nnunet,[Python Package],"A deep learning framework for biomedical image segmentation, providing a standardized approach to training and inference."
+flowcytometrytools,[Python Package],Analysis and visualization of flow cytometry data.
+cellpose,[Python Package],Cell segmentation in microscopy images.
+viennarna,[Python Package],RNA secondary structure prediction.
+PyMassSpec,[Python Package],Mass spectrometry data analysis.
+python-libsbml,[Python Package],Working with SBML files for computational biology.
+cobra,[Python Package],Constraint-based modeling of metabolic networks.
+reportlab,[Python Package],Creation of PDF documents.
+flowkit,[Python Package],Toolkit for processing flow cytometry data.
+hmmlearn,[Python Package],Hidden Markov model analysis.
+msprime,[Python Package],Simulation of genetic variation.
+tskit,[Python Package],Handling tree sequences and population genetics data.
+cyvcf2,[Python Package],Fast parsing of VCF files.
+pykalman,[Python Package],Kalman filter and smoother implementation.
+fanc,[Python Package],Analysis of chromatin conformation data.
+loompy,General/Other,A Python implementation of the Loom file format for efficiently storing and working with large omics datasets.
+pyBigWig,General/Other,A Python library for accessing bigWig and bigBed files for genome browser track data.
+pymzml,General/Other,A Python module for high-throughput bioinformatics analysis of mass spectrometry data.
+optlang,General/Other,A Python package for modeling optimization problems symbolically.
+FlowIO,General/Other,A Python package for reading and writing flow cytometry data files.
+FlowUtils,General/Other,Utilities for processing and analyzing flow cytometry data.
+arboreto,General/Other,A Python package for inferring gene regulatory networks from single-cell RNA-seq data.
+pdbfixer,General/Other,A Python package for fixing problems in PDB files in preparation for molecular simulations.
+ggplot2,[R Package],"A system for declaratively creating graphics, based on The Grammar of Graphics. Use with subprocess.run(['Rscript', '-e', 'library(ggplot2); ...'])."
+dplyr,[R Package],"A grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. Use with subprocess."
+tidyr,[R Package],"A package that helps you create tidy data, where each column is a variable, each row is an observation, and each cell is a single value. Use with subprocess."
+readr,[R Package],"A fast and friendly way to read rectangular data like CSV, TSV, and FWF. Use with subprocess.run(['Rscript', '-e', 'library(readr); ...'])."
+stringr,[R Package],A cohesive set of functions designed to make working with strings as easy as possible. Use with subprocess calls.
+Matrix,[R Package],A package that provides classes and methods for dense and sparse matrices. Required for Seurat. Use with subprocess calls.
+Rcpp,[R Package],"Seamless R and C++ Integration, allowing R functions to call compiled C++ code. Use with subprocess calls."
+devtools,[R Package],"Tools to make developing R packages easier, including functions to install packages from GitHub. Use with subprocess calls."
+remotes,[R Package],"Install R packages from GitHub, GitLab, Bitbucket, or other remote repositories. Use with subprocess calls."
+DESeq2,[R Package],"Differential gene expression analysis based on the negative binomial distribution. Use with subprocess.run(['Rscript', '-e', 'library(DESeq2); ...'])."
+clusterProfiler,[R Package],A package for statistical analysis and visualization of functional profiles for genes and gene clusters. Use with subprocess calls.
+DADA2,[R Package],A package for modeling and correcting Illumina-sequenced amplicon errors. Use with subprocess calls.
+xcms,[R Package],A package for processing and visualization of LC-MS and GC-MS data. Use with subprocess calls.
+FlowCore,[R Package],Basic infrastructure for flow cytometry data. Use with subprocess calls.
+edgeR,[R Package],"Empirical Analysis of Digital Gene Expression Data in R, for differential expression analysis. Use with subprocess calls."
+limma,[R Package],"Linear Models for Microarray Data, for differential expression analysis. Use with subprocess calls."
+harmony,[R Package],A method for integrating and analyzing single-cell data across datasets. Use with subprocess calls.
+WGCNA,[R Package],Weighted Correlation Network Analysis for studying biological networks. Use with subprocess calls.
+ssGSEA,General/Other,"Single-sample GSEA (ssGSEA), an extension of Gene Set Enrichment Analysis (GSEA), calculates separate enrichment scores for each pairing of a sample and gene set. Each ssGSEA enrichment score represents the degree to which the genes in a particular gene set are coordinately up- or down-regulated within a sample."
+MISTy,General/Other,"Multiview Intercellular SpaTial modeling framework (MISTy) is an explainable machine learning framework for knowledge extraction and analysis of single-cell, highly multiplexed, spatially resolved data.MISTy facilitates an in-depth understanding of marker interactions by profiling the intra- and intercellular relationships. MISTy is a flexible framework able to process a custom number of views. Each of these views can describe a different spatial context, i.e., define a relationship among the observed expressions of the markers, such as intracellular regulation or paracrine regulation."
+Cottrazm,General/Other,"Cottrazm (Construct Tumor Transition Zone (Boundary) Microenvironment based on spatial transcriptomics) aims to construct the microenvironment of tumor boundary based on spatial transcriptomics, single-cell transcriptomics and HE-stained histological images. It consists of three core functions: determining the tumor boundary (Cottrazm-BoundaryDefine), deconvoluting spatial transcriptomics (Cottrazm-SpatialDecon), and reconstructing a spatial gene expression matrix for sub-spots (Cottrazm-SpatialRecon)."
+cell2location,General/Other,Cell2location is a principled Bayesian model that can resolve fine-grained cell types in spatial transcriptomic data and create comprehensive cellular maps of diverse tissues. 
+CARD,General/Other,"We developed a statistical method for spatially informed cell type deconvolution for spatial transcriptomics. Briefly,CARD is a reference-based deconvolution method that estimates cell type composition in spatial transcriptomics based on cell type specific expression information obtained from a reference scRNA-seq data. "
+samtools,[CLI Tool],"A suite of programs for interacting with high-throughput sequencing data. Use with subprocess.run(['samtools', ...])."
+bowtie2,[CLI Tool],"An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. Use with subprocess.run(['bowtie2', ...])."
+bwa,[CLI Tool],"Burrows-Wheeler Aligner for mapping low-divergent sequences against a large reference genome. Use with subprocess.run(['bwa', ...])."
+bedtools,[CLI Tool],"A powerful toolset for genome arithmetic, allowing operations like intersect, merge, count, and complement on genomic features. Use with subprocess.run(['bedtools', ...])."
+macs2,[CLI Tool],"Model-based Analysis of ChIP-Seq data, a tool for identifying transcript factor binding sites."
+fastqc,[CLI Tool],"A quality control tool for high throughput sequence data. Use with subprocess.run(['fastqc', ...])."
+trimmomatic,[CLI Tool],"A flexible read trimming tool for Illumina NGS data. Use with subprocess.run(['trimmomatic', ...])."
+mafft,[CLI Tool],"A multiple sequence alignment program for unix-like operating systems. Use with subprocess.run(['mafft', ...])."
+Homer,[CLI Tool],Motif discovery and next-gen sequencing analysis.
+FastTree,[CLI Tool],Phylogenetic trees from sequence alignments.
+muscle,[CLI Tool],Multiple sequence alignment tool.
+plink,[CLI Tool],"A comprehensive toolkit for genome association studies that can perform a range of large-scale analyses in a computationally efficient manner. Use with subprocess.run(['plink', ...])."
+plink2,[CLI Tool],"A comprehensive toolkit for genome association studies that can perform a range of large-scale analyses in a computationally efficient manner. Use with subprocess.run(['plink2', ...])."
+gcta64,[CLI Tool],"Genome-wide Complex Trait Analysis (GCTA) tool for estimating the proportion of phenotypic variance explained by genome-wide SNPs and analyzing genetic relationships. Use with subprocess.run(['gcta64', ...])."
+iqtree2,[CLI Tool],"An efficient phylogenetic software for maximum likelihood analysis with built-in model selection and ultrafast bootstrap. Use with subprocess.run(['iqtree2', ...])."
+ADFR,General/Other,AutoDock for Receptors suite for molecular docking and virtual screening. 
+diamond,General/Other,"A sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. "
+fcsparser,General/Other,A command-line tool for parsing and analyzing flow cytometry standard (FCS) files. 
+plannotate,[CLI Tool],A tool for annotating plasmid sequences with common features.
+vina,[CLI Tool],"An open-source program for molecular docking and virtual screening, known for its speed and accuracy improvements over AutoDock 4."
+autosite,[CLI Tool],A binding site detection tool used to identify potential ligand binding pockets on protein structures for molecular docking.
+PyLabRobot,[Python Package],A Python package for controlling liquid-handling robots and other lab automation equipment.

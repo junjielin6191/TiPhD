@@ -1,0 +1,83 @@
+﻿数据集,Datasets,Cancer type,Platform,Sample,Drug,Response,Treatment
+GSE203552,GSE15913,Leukemia,GPL570,20,Thalidomide,"9NR,11R",Immunotherapy
+GSE171351,GSE35935,Leukemia,GPL570,62,Chlorambucil+Rituximab,"5NR,57R",Immunotherapy
+GSE171351,GSE111636,Bladder Cancer,GPL17586,11,Pembrolizumab,"5NR,6R",Immunotherapy
+HRA000437,GSE176178,Bladder Cancer,Illumina NextSeq 500,40,BCG vaccine,"23NR,17R","Chemotherapy,Immunotherapy"
+GSE203612,GSE244895,Bladder Cancer,Illumina NovaSeq 6000,13,BCG vaccine,"10NR,3R",Immunotherapy
+GSE182867,EGAS0000100,Non-Small Cell Lung Cancer,TruSeq RNA Access technology,47,Anti-PD1,"1 CR,12 PR, 34 PD",Immunotherapy
+GSE194329,EGAS00001005,Non-Small Cell Lung Cancer,TruSeq RNA Access technology,207,Anti-PD1,"4 CR,44 PR, 159 PD",Immunotherapy
+GSE195661,GSE126044,Non-Small Cell Lung Cancer,Illumina HiSeq 2500,16,Nivolumab,"5R,11NR",Immunotherapy
+VISDP000154,GSE135222,Non-Small Cell Lung Cancer,Illumina HiSeq 2500,27,Anti-PD-1,"8R,19NR",Immunotherapy
+GSE225857,GSE166449,Non-Small Cell Lung Cancer,Illumina HiSeq 2000,22,Pembrolizumab,"7R,15NR",Immunotherapy
+VISDP000156,GSE216297,Non-Small Cell Lung Cancer,Illumina HiSeq 4000,286,Nivolumab,"88R,198NR",Immunotherapy
+GSE203552,GSE33072,Non-Small Cell Lung Cancer,GPL6244,39,Sorafenib,"23R,16NR",Immunotherapy
+GSE144239,GSE215011,Lung Cancer,GPL11154,10,Nivolumab,5R，5NR,Immunotherapy
+GSE144239,GSE109211,Liver Cancer,GPL13938,67,Sorafenib,21R，46NR,Immunotherapy
+GSE203612,GSE140901,Liver Cancer,GPL19965 Panel,24,Anti-PD-1,"8 PD,6 PR,10 SD",Immunotherapy
+GSE227019,GSE56059,Liver Cancer,GPL8786,20,Sorafenib,"16 PR or SD,4 PD",Immunotherapy
+GSE211956,TCGA-LIHC,Liver Cancer,,17,Sorafenib,"13PD, 3 PR, 1SD",Immunotherapy
+GSE189843,GSE222932,Hepatocellular Carcinoma,Illumina NovaSeq 6000,15,Atezolizumab+Guadecitabine,"4SD, 11PD","Chemotherapy,Immunotherapy"
+GSE194329,ArrayExpress-4030,Melanoma,NA,47,Anti-PD1,"11R,36NR",Immunotherapy
+GSE203612,Gide2019,Melanoma,Illumina Hiseq 2500,50,Anti-PD1,"23 CR or PR, 7 SD, 20 PD",Immunotherapy
+GSE203612,GSE122220,Melanoma,GPL10558,10,Anti-PD-1,"4 CR or PR, 1 SD, 5PD",Immunotherapy
+GSE203612,GSE145996,Melanoma,Illumina HiSeq 2500,14,Anti-PD-1,"8 CR or PR, 6 PD",Immunotherapy
+GSE175540,GSE158403,Melanoma,Illumina HiSeq 2500,48,Anti-PD1+Targeted therapy,"22R,26NR","Targeted therapy,Immunotherapy"
+GSE175540,GSE160638,Melanoma,Illumina HiSeq 2500,36,Anti-PD1,"22 CR or PR, 2 SD, 12PD",Immunotherapy
+GSE181300,GSE160638,Melanoma,Illumina HiSeq 2500,37,TIL-ACT,"19R,18NR",Immunotherapy
+GSE227469,GSE168204,Melanoma,Illumina HiSeq 2000,10,Anti-PD-1,"5 CR or PR, 5 PD",Immunotherapy
+GSE203612,GSE171256,Melanoma,Illumina NovaSeq 6000,28,ICI therapy,"14R,14NR",Immunotherapy
+GSE211895,GSE35640,Melanoma,GPL570,56,AS02B/AS15+recMAGE-A3,"22R,34NR",Immunotherapy
+GSE202740,GSE78220,Melanoma,Illumina HiSeq 2000,28,Anti-PD1,"15R,13NR",Immunotherapy
+GSE208654,GSE91061,Melanoma,Illumina Genome Analyzer,105,Anti-CTLA4 and ant-PD1,"23 CR or PR, 34 SD, 48 PD",Immunotherapy
+GSE225690,Liu2019,Melanoma,Illumina HiSeq 2500,54,Anti-PD1,"28 CR or PR, 6 SD, 20 PD",Immunotherapy
+,PUCH2021,Melanoma,Illumina NovaSeq 6000,55,Anti-PD1,"14 CR or PR, 6 SD, 35 PD",Immunotherapy
+,Riaz2017,Melanoma,GPL9052,51,Anti-PD1,"10 CR or PR, 16 SD, 25 PD",Immunotherapy
+,GSE181815,Thyroid Cancer,Illumina HiSeq 4000,8,Pembrolizumab,"4 CR or PR, 4PD",Immunotherapy
+,E-MEXP-3368,Colorectal Cancer,A-AFFY-101,8,5-FU and L-OHP,"1 PR,4 PD,3 SD",Chemotherapy
+,GSE104645,Colorectal Cancer,GPL6480,5,Fluorouracil+Irinotecan+Leucovorin,"3PR,2SD","Chemotherapy,Targeted therapy,"
+,GSE154538,Colorectal Cancer,GPL23934,6,Anti-PD1,"3PD,3SD","Chemotherapy,Targeted therapy,Immunotherapy"
+,GSE19860,Colorectal Cancer,GPL570,17,MFOLFOX6,"3 R,14 NR",Immunotherapy
+,GSE235919,Colorectal Cancer,Illumina NextSeq 500,34,MFOLFOX6,"23R,11NR",Chemotherapy
+,GSE28702,Colorectal Cancer,GPL570,27,MFOLFOX6,"16 R,11 NR","Chemotherapy,Immunotherapy"
+,GSE52735,Colorectal Cancer,GPL570,37,5-FU,"23 R,14 NR",Chemotherapy
+,GSE69657,Colorectal Cancer,GPL570,30,FOLFOX6,"13 R, 17 NR",Chemotherapy
+,ArrayExpress:E-MTAB-6597,Lymphoma,P-MTAB-73099 nucleic acid sequencing protocol Ion Proton single end reads (ThermoFisher),17,Cyclophosphamide+Doxorubicin+Prednisone+Rituximab+Vincristine,"7NR,10R",Immunotherapy
+,GSE162137,Lymphoma,Illumina NextSeq 500,25,Pembrolizumab,"14NR,11R",Immunotherapy
+,GSE173263,Lymphoma,GPL13667,39,Cyclophosphamide+Doxorubicin+Prednisolone+Rituximab+Vincristine,"10NR,29R",Immunotherapy
+,GSE18376,Lymphoma,GPL6244 ,23,Dacetuzumab,"17NR,6R",Immunotherapy
+,GSE193566,Lymphoma,GPL17303,6,Cyclophosphamide+Doxorubicin+Methotrexate+Prednisolone+Rituximab+Vincristine,"3NR,3R",Immunotherapy
+,GSE193566,Lymphoma,GPL17303,60,Cyclophosphamide+Doxorubicin+Prednisolone+Rituximab+Vincristine,"30NR,30R",Immunotherapy
+,GSE243919,Lymphoma,Illumina HiSeq 2500,8,Mosunetuzumab,"4NR,4R",Immunotherapy
+,GSE188249,Ovarian Cancer,Illumina HiSeq 2000,17,Guadecitabine+Pembrolizumab,"10NR,7R","Chemotherapy,Immunotherapy"
+,E-MTAB-6270,Brain Cancer,,12,Peptide vaccine immunotherapy,"5 CR or PR, 7 SD",Immunotherapy
+,TCGA-SKCM,Skin Cancer,,8,Ipilimumab,"6NR,2R",Immunotherapy
+,TCGA-SKCM,Skin Cancer,,16,Peginterferon alfa-2a,"7NR,9R",Immunotherapy
+,GSE139050,Breast Cancer,Illumina HiSeq 2500,6,Bevacizumab+Durvalumab,"3NR,3R","Chemotherapy,Immunotherapy"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,34,MK-2206+Paclitaxel+Trastuzumab,"17NR,17R","Chemotherapy,Immunotherapy"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,69,Paclitaxel+Pembrolizumab,"38NR,31R","Chemotherapy,Immunotherapy"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,19,Paclitaxel+Trastuzumab+Trebananib,"13NR,6R","Chemotherapy,Immunotherapy"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,52,Pertuzumab+Trastuzumab emtansine,"22NR,30R","Chemotherapy,Immunotherapy"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,107,Ganitumab+Paclitaxel,"83NR,24R","Chemotherapy,Targeted therapy,"
+,GSE194040,Breast Cancer,GPL20078；GPL30493,44,Paclitaxel+Pertuzumab+Trastuzumab,"18NR,26R",Immunotherapy
+,GSE194041,Breast Cancer,GPL20078；GPL30493,31,Paclitaxel+Trastuzumab,"23NR,8R","Chemotherapy,Targeted therapy,Immunotherapy"
+,GSE20194,Breast Cancer,GPL96,6,TH (Paclitaxel+Trastuzumab)/FAC (Cyclophosphamide+Doxorubicin+Fluorouracil),"4NR,2R",Immunotherapy
+,GSE241876,Breast Cancer,Illumina HiSeq 4000,15,Carboplatin+Paclitaxel+Pembrolizumab,"7NR,8R","Chemotherapy,Targeted therapy,Immunotherapy"
+,GSE28844,Breast Cancer,GPL570,16,Cyclophosphamide+Epirubicin+Gemcitabine+Paclitaxel+Trastuzumab,"8NR,8R","Chemotherapy,Immunotherapy"
+,GSE37946,Breast Cancer,GPL96,50,Trastuzumab,"23NR,27R","Chemotherapy,Immunotherapy"
+,GSE42822,Breast Cancer,GPL96,25,FEC (Cyclophosphamide+Epirubicin+Fluorouracil)/TX (Capecitabine+Docetaxel)+Trastuzumab,"13NR,12R","Chemotherapy,Targeted therapy,Immunotherapy"
+,GSE44272,Breast Cancer,GPL13667,8,Trastuzumab,"2NR,6R","Chemotherapy,Immunotherapy"
+,GSE44272,Breast Cancer,GPL13667,45,Trastuzumab,"16NR,29R",Immunotherapy
+,GSE50948,Breast Cancer,GPL570,63,AT (Doxorubicin+Paclitaxel)+CMF (Cyclophosphamide+Fluorouracil+Methotrexate)+Trastuzumab,"32NR,31R","Chemotherapy,Immunotherapy"
+,GSE66305,Breast Cancer,GPL570,23,TFEC (Cyclophosphamide+Epirubicin+Fluorouracil+Paclitaxel)+Trastuzumab,"17NR,6R","Chemotherapy,Immunotherapy"
+,GSE66305,Breast Cancer,GPL570,34,TFEC (Cyclophosphamide+Epirubicin+Fluorouracil+Paclitaxel)+Trastuzumab+Lapatinib,"21NR,13R",Immunotherapy
+,GSE66999,Breast Cancer,GPL6480,76,Docetaxel+Epirubicin+Pegfilgrastim,"6NR,70R",Chemotherapy
+,GSE70233,Breast Cancer,GPL570,22,Trastuzumab+Vinorelbine,"19NR,3R","Chemotherapy,Immunotherapy"
+,GSE76360,Breast Cancer,GPL6947,48,Trastuzumab,"6NR,42R","Targeted therapy,Immunotherapy"
+,ArrayExpress:E-MTAB-3218,Kidney Cancer,,56,Nivolumab,"47NR,9R",Immunotherapy
+,ArrayExpress:E-MTAB-3219,Kidney Cancer,,57,Nivolumab,"50NR,7R","Chemotherapy,Immunotherapy"
+,GSE180925,Kidney Cancer,Illumina HumanHT-12 WG-DASL V4.0 R2 expression beadchip,22,Sorafenib,"10NR,12R","Targeted therapy,Immunotherapy"
+,GSE67501,Kidney Cancer,Illumina HumanHT-12 WG-DASL V4.0 R2 expression beadchip,11,Nivolumab,"7NR,4R",Immunotherapy
+,GSE87121,Kidney Cancer,GPL5175,10,Sorafenib,"5NR,5R",Immunotherapy
+,GSE154538,Esophageal Cancer,GPL23934,6,Nivolumab,"3NR,3R",Immunotherapy
+,PRJEB25780,Gastric Cancer,Illumina HiSeq 2500,45,Anti-PD1,45 R,Immunotherapy
+,PRJEB40416,Gastric Cancer,Illumina HiSeq 2500,15,Anti-PD1,15 R,Immunotherapy

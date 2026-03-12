@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Details{% endblock %}
+
+{% block content %}
+<div class="details-container">
+    <table class="styled-table">
+        <tbody>
+            {% for category, fields in data.items() %}
+            <tr>
+                <th colspan="2" >{{ category }}</th>
+            </tr>
+            {% for field, value in fields.items() %}
+            <tr>
+                <td><strong>{{ field.replace('_', ' ').title() }}</strong></td>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}            
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+{% endblock %}

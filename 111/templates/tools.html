@@ -1,0 +1,421 @@
+{% extends 'base.html' %}
+
+{% block title %}TiRank - {{ table_name | capitalize }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if page == 'celltype' %}
+    <!-- TiRank-Celltype 内容 -->
+    <div class="data-tables">
+        <!-- Bulk RNA-seq 数据表格 -->
+        <div class="table-section mb-4">
+            <h3>Bulk RNA-seq Datasets</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Cancer Type</th>
+                            <th>Platform</th>
+                            <th>Sample</th>
+                            <th>Drug</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in bulk_data %}
+                        <tr class="table-row {% if loop.index > 5 %}d-none{% endif %}" data-table="bulk" data-page="1">
+                            <td>{{ row.Datasets }}</td>
+                            <td>{{ row['Cancer type'] }}</td>
+                            <td>{{ row.Platform }}</td>
+                            <td>{{ row.Sample }}</td>
+                            <td>{{ row.Drug }}</td>
+                            <td>{{ row.Response }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- 分页控件 -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        {% set pages = (bulk_data|length / 5)|round(0, 'ceil')|int %}
+                        {% for i in range(1, pages + 1) %}
+                        <li class="page-item {% if i == 1 %}active{% endif %}">
+                            <a class="page-link" href="#" data-table="bulk" data-page="{{ i }}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- scRNA-seq 数据表格 -->
+        <div class="table-section">
+            <h3>scRNA-seq Datasets</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Cancer Type</th>
+                            <th>Sample Type</th>
+                            <th>Samples</th>
+                            <th>Platform</th>
+                            <th>Number of Cells</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in scrna_data %}
+                        <tr class="table-row {% if loop.index > 5 %}d-none{% endif %}" data-table="scrna" data-page="1">
+                            <td>{{ row.Dataset }}</td>
+                            <td>{{ row['Cancer Type'] }}</td>
+                            <td>{{ row['Sample Type'] }}</td>
+                            <td>{{ row.Samples }}</td>
+                            <td>{{ row.Platform }}</td>
+                            <td>{{ row['Number of Cells'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- 分页控件 -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        {% set pages = (scrna_data|length / 5)|round(0, 'ceil')|int %}
+                        {% for i in range(1, pages + 1) %}
+                        <li class="page-item {% if i == 1 %}active{% endif %}">
+                            <a class="page-link" href="#" data-table="scrna" data-page="{{ i }}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- TiRank Results 部分 -->
+    <div class="tirank-section">
+        <h2 class="section-title">Select a slice to view the TiRank results</h2>
+        
+        <div class="tirank-container">
+            <!-- 左侧筛选区域 -->
+            <div class="filter-section">
+                <div class="filter-row">
+                    <label>Species:</label>
+                    <select class="form-select">
+                        <option value="">Select Species</option>
+                        <option value="human">Human</option>
+                        <option value="mouse">Mouse</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Cancer:</label>
+                    <select class="form-select">
+                        <option value="">Select Cancer</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Cancer type detail:</label>
+                    <select class="form-select">
+                        <option value="">Select Cancer type detail</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Bulk RNA-seq datasets:</label>
+                    <select class="form-select">
+                        <option value="">Select bulk RNA-seq dataset</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>scRNA-seq datasets:</label>
+                    <select class="form-select">
+                        <option value="">Select scRNA-seq dataset</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 右侧结果展示区 -->
+            <div class="results-section">
+                <!-- TiRank score 下载链接 -->
+                <div class="download-box">
+                    <a href="{{ url_for('static', filename='tirank/spot_predict_score.csv') }}" class="tirank-download">
+                        TiRank score.csv
+                    </a>
+                </div>
+                
+                <!-- 图片展示区 -->
+                <div class="image-grid">
+                    
+                    <!-- 分析结果图 -->
+                    <div class="image-row">
+                        <div class="image-item">
+                            <img src="{{ url_for('static', filename='tirank/tirankcluster.png') }}" 
+                                 alt="Spatial of TiRank Label Score"
+                                 class="zoomable">
+                        </div>
+                        <div class="image-item">
+                            <img src="{{ url_for('static', filename='tirank/cellcluster.png') }}" 
+                                 alt="Spatial of TiRank Pred Score"
+                                 class="zoomable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% elif page == 'spatial' %}
+    <!-- TiRank-Spatiallayer 内容 -->
+    <div class="data-tables">
+        <!-- Bulk RNA-seq 数据表格 -->
+        <div class="table-section mb-4">
+            <h3>Bulk RNA-seq Datasets</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Cancer Type</th>
+                            <th>Platform</th>
+                            <th>Sample</th>
+                            <th>Drug</th>
+                            <th>Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in bulk_data %}
+                        <tr class="table-row {% if loop.index > 5 %}d-none{% endif %}" data-table="bulk" data-page="1">
+                            <td>{{ row.Datasets }}</td>
+                            <td>{{ row['Cancer type'] }}</td>
+                            <td>{{ row.Platform }}</td>
+                            <td>{{ row.Sample }}</td>
+                            <td>{{ row.Drug }}</td>
+                            <td>{{ row.Response }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- 分页控件 -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        {% set pages = (bulk_data|length / 5)|round(0, 'ceil')|int %}
+                        {% for i in range(1, pages + 1) %}
+                        <li class="page-item {% if i == 1 %}active{% endif %}">
+                            <a class="page-link" href="#" data-table="bulk" data-page="{{ i }}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Spatial transcriptome 数据表格 -->
+        <div class="table-section">
+            <h3>Spatial Transcriptomics Datasets</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Cancer Type</th>
+                            <th>Samples</th>
+                            <th>Platform</th>
+                            <th>Spot Number</th>
+                            <th>The average number of genes per spot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in st_data %}
+                        <tr class="table-row {% if loop.index > 5 %}d-none{% endif %}" data-table="st" data-page="1">
+                            <td>{{ row.Dataset }}</td>
+                            <td>{{ row['Cancer Type'] }}</td>
+                            <td>{{ row.Samples }}</td>
+                            <td>{{ row.Platform }}</td>
+                            <td>{{ row['Spot Number'] }}</td>
+                            <td>{{ row['The average number of genes per spot'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <!-- 分页控件 -->
+                <nav aria-label="Page navigation" class="mt-3">
+                    <ul class="pagination justify-content-center">
+                        {% set pages = (st_data|length / 5)|round(0, 'ceil')|int %}
+                        {% for i in range(1, pages + 1) %}
+                        <li class="page-item {% if i == 1 %}active{% endif %}">
+                            <a class="page-link" href="#" data-table="st" data-page="{{ i }}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- TiRank Results 部分 -->
+    <div class="tirank-section">
+        <h2 class="section-title">Select a slice to view the TiRank results</h2>
+        
+        <div class="tirank-container">
+            <!-- 左侧筛选区域 -->
+            <div class="filter-section">
+                <div class="filter-row">
+                    <label>Species:</label>
+                    <select class="form-select">
+                        <option value="">Select Species</option>
+                        <option value="human">Human</option>
+                        <option value="mouse">Mouse</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Cancer:</label>
+                    <select class="form-select">
+                        <option value="">Select Cancer</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Cancer type detail:</label>
+                    <select class="form-select">
+                        <option value="">Select Cancer type detail</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Bulk RNA-seq datasets:</label>
+                    <select class="form-select">
+                        <option value="">Select bulk RNA-seq dataset</option>
+                    </select>
+                </div>
+                
+                <div class="filter-row">
+                    <label>Spatial transcriptome datasets:</label>
+                    <select class="form-select">
+                        <option value="">Select Spatial transcriptome dataset</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 右侧结果展示区 -->
+            <div class="results-section">
+                <!-- TiRank score 下载链接 -->
+                <div class="download-box">
+                    <a href="{{ url_for('static', filename='tirank/spot_predict_score.csv') }}" class="tirank-download">
+                        TiRank score.csv
+                    </a>
+                </div>
+                
+                <!-- 图片展示区 -->
+                <div class="image-grid">
+                    <!-- HE染色图 -->
+                    <div class="image-row">
+                        <div class="image-item large">
+                            <img src="{{ url_for('static', filename='tirank/tissue_hires_image.png') }}" 
+                                 alt="HE Staining"
+                                 class="zoomable">
+                        </div>
+                    </div>
+                    
+                    <!-- 分析结果图 -->
+                    <div class="image-row">
+                        <div class="image-item">
+                            <img src="{{ url_for('static', filename='tirank/Spatial_of_TiRank_Label_Score.png') }}" 
+                                 alt="Spatial of TiRank Label Score"
+                                 class="zoomable">
+                        </div>
+                        <div class="image-item">
+                            <img src="{{ url_for('static', filename='tirank/Spatial_of_TiRank_Pred_Score.png') }}" 
+                                 alt="Spatial of TiRank Pred Score"
+                                 class="zoomable">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif page == 'tooldb' %}
+    <!-- ToolDB 内容 -->
+    <div class="tooldb-container">
+        <!-- 搜索和筛选区域 -->
+        <div class="search-filter-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search tools...">
+            </div>
+            <div class="filter-box">
+                <select id="categoryFilter" class="form-select">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- 工具表格区域 -->
+        <div id="toolTables">
+            {% for category, tools in tools_by_category.items() %}
+            <div class="table-section" data-category="{{ category }}">
+                <h3>{{ category }}</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Method</th>
+                                <th>Function_detail</th>
+                                <th>Github</th>
+                                <th>Paper</th>
+                                <th>PMID</th>
+                                <th>Technology</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tool in tools %}
+                            <tr class="table-row {% if loop.index > 5 %}d-none{% endif %}" 
+                                data-table="{{ category }}" 
+                                data-page="1">
+                                <td>{{ tool['Function'] }}</td>
+                                <td>{{ tool['Method'] }}</td>
+                                <td>{{ tool['Function_detail'] }}</td>
+                                <td><a href="{{ tool['Github'] }}" target="_blank">Github</a></td>
+                                <td>{{ tool['Paper'] }}</td>
+                                <td>{{ tool['PMID'] }}</td>
+                                <td>{{ tool['Technology'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- 分页控件 -->
+                    <nav aria-label="Page navigation" class="mt-3">
+                        <ul class="pagination justify-content-center">
+                            {% set pages = (tools|length / 5)|round(0, 'ceil')|int %}
+                            {% for i in range(1, pages + 1) %}
+                            <li class="page-item {% if i == 1 %}active{% endif %}">
+                                <a class="page-link" href="#" 
+                                   data-table="{{ category }}" 
+                                   data-page="{{ i }}">{{ i }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <!-- 默认内容 -->
+    <div class="data-tables">
+        <!-- ... 默认表格内容 ... -->
+    </div>
+    {% endif %}
+</div>
+
+<!-- 引入 CSS 和 JS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tools.css') }}">
+<script src="{{ url_for('static', filename='js/tools.js') }}"></script>
+{% endblock %}

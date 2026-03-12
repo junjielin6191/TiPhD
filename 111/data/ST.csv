@@ -1,0 +1,33 @@
+﻿Dataset,Cancer Type,Samples,Platform,Spot Number,The average number of genes per spot
+GSE203552,CNS lymphoma,4,10X,4602,5776
+GSE171351,bladder cancer,4,10X,4355,3011
+GSE171351,bladder cancer,4,10X,4086,3050
+HRA000437,hepatocarcinoma,18,10X,75717,3326
+GSE203612,melanoma,2,10X,5595,2430
+GSE182867,melanoma,4,10X,6415,5755
+GSE194329,Glioblastoma,11,10X,27233,4614
+GSE195661,Glioblastoma,14,10X,33213,3807
+VISDP000154,Colorectal cancer,2,10X,6505,1298
+GSE225857,Colorectal cancer,6,10X,24314,3304
+VISDP000156,Colorectal cancer,14,10X,20733,3758
+GSE203552,lymphoma,4,10X,4602,5776
+GSE144239,Squamous cell carcinoma,4,10X,8928,2050
+GSE144239,Squamous cell carcinoma,4,10X,8928,2050
+GSE203612,Ovarian cancer,3,10X,5212,2264
+GSE227019,Ovarian cancer,6,10X,14435,3190
+GSE211956,Ovarian cancer,8,10X,20123,2790
+GSE189843,Ovarian cancer,12,10X,5266,3740
+GSE194329,Diffuse midline glioma,11,10X,27233,4614
+GSE203612,breast cancer,3,10X,6593,2178
+GSE203612,breast cancer,10,10X,19934,1967
+GSE203612,breast cancer,12,10X,25528,2047
+GSE175540,Kidney cancer,24,10X,74220,3734
+GSE175540,Kidney cancer,24,10X,74220,89623
+GSE181300,Squamous cell carcinoma of the head and neck,8,10X,12038,1907
+GSE227469,Head and neck angiosarcoma,4,10X,6008,3809
+GSE203612,gastric cancer,2,10X,5117,1609
+GSE211895,pancreatic cancer,3,10X,7697,3392
+GSE202740,pancreatic cancer,4,10X,13030,4226
+GSE208654,cervical cancer,3,10X,3930,2560
+GSE225690,Endometrial cancer,4,10X,4526,4779
+,,,,,
