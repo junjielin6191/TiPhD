@@ -1,10 +1,10 @@
-# File: Tool_Agent/agent/planner_agent.py
+# File: Workflow_Agent/agent/planner_agent.py
 
 import json
 from typing import Any, Dict, List, Tuple, Optional 
 from langchain_core.prompts import ChatPromptTemplate
-from Tool_Agent.agent.base_agent import base_agent 
-from Tool_Agent.llm import get_llm 
+from Workflow_Agent.agent.base_agent import base_agent 
+from Workflow_Agent.llm import get_llm 
 
 class PlannerAgent(base_agent):
     """

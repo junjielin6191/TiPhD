@@ -11,8 +11,8 @@ try:
     # 假设这里的导入路径需要根据您的实际结构进行调整
     # 例如：from config import default_config, from llm import get_llm
     # 这里保持原有结构，但需要注意实际运行时路径可能需要调整
-    from Tool_Agent.config import default_config
-    from Tool_Agent.llm import get_llm 
+    from Workflow_Agent.config import default_config
+    from Workflow_Agent.llm import get_llm 
 except ImportError:
     # 如果无法导入，则使用最小化的虚拟对象进行回退，以确保代码块可运行
     class DummyConfig:

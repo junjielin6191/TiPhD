@@ -126,7 +126,7 @@ from pathlib import Path
 
 def _prepare_tool_resources(self) -> Dict[str, List[Any]]:
     """
-    构建 Tool_Agent 资源池：整合无标签工具与 experiment_records.json 实验库
+    构建 Workflow_Agent 资源池：整合无标签工具与 experiment_records.json 实验库
     """
     tools = []
     libraries = []

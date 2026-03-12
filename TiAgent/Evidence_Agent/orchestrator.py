@@ -8,7 +8,7 @@ from typing import Dict, List, Any
 ORCHESTRATOR_MODEL = "gpt-4o" 
 
 # Knowledge Base Descriptions, used to guide the LLM for routing decisions. MUST BE IN ENGLISH.
-# Paper_Agent/orchestrator.py
+# Evidence_Agent/orchestrator.py
 
 # 1. 精简知识库映射，仅保留文献相关 Agent
 KNOWLEDGE_BASE_MAP = {

@@ -13,20 +13,9 @@ except ImportError:
     print("❌ 警告：未找到 faiss 依赖。请运行 'pip install faiss-cpu'")
 
 # 1. 导入 Orchestrator 逻辑和配置
-from Paper_Agent.orchestrator import orchestrate_query, KNOWLEDGE_BASE_MAP
+from Evidence_Agent.orchestrator import orchestrate_query, KNOWLEDGE_BASE_MAP
 # Import RAG Agents core functions
-try:
-    from Paper_Agent.rag_multi_agent_query import generate_answer, retrieve_chunks, validate_and_finalize_answer
-except ImportError:
-    # Fallback/Mock import if the file is missing
-    print("⚠️ 警告：未找到 rag_multi_agent_query.py 文件。请确保函数已定义或导入。")
-    def generate_answer(client: OpenAI, query: str, retrieved_chunks: list, history: List[Dict[str, str]]) -> str:
-        return "模拟答案生成：请确保 rag_multi_agent_query 文件存在。"
-    def retrieve_chunks(client: OpenAI, query: str, index: faiss.Index, id_map: list, rag_data: list, source_table: str, metadata_filter: Dict[str, str], k: int = 5) -> list:
-        return []
-    def validate_and_finalize_answer(client: OpenAI, reasoning_answer: str, retrieved_chunks: list) -> str:
-        return reasoning_answer
-
+from Evidence_Agent.rag_multi_agent_query import retrieve_chunks, generate_answer, validate_and_finalize_answer
 
 # --- Configuration Definition (Must be consistent) ---
 import os
@@ -35,7 +24,7 @@ from pathlib import Path
 # 获取当前文件 (main.py) 所在的目录路径
 BASE_DIR = Path(__file__).parent
 
-# 修改资产文件路径，将其指向 Paper_Agent 文件夹内部
+# 修改资产文件路径，将其指向 Evidence_Agent 文件夹内部
 VECTOR_INDEX_FILE = str(BASE_DIR / 'rag_knowledge_index.faiss')
 RAG_DATA_JSON = str(BASE_DIR / 'rag_knowledge_data.json')
 ID_MAP_FILE = str(BASE_DIR / 'faiss_id_map.json')

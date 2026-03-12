@@ -7,7 +7,7 @@ from langchain_core.language_models.chat_models import BaseChatModel # 引入通
 # 假设导入路径与您的项目结构一致
 # 确保可以导入我们新增的 SelectedResources 模型
 try:
-    from Tool_Agent.model.structured_output import SelectedResources
+    from Workflow_Agent.model.structured_output import SelectedResources
 except ImportError:
     # 如果路径导入失败，使用一个 Dummy 类来保证代码块可运行
     class SelectedResources:
