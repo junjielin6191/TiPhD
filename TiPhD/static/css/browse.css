@@ -1,129 +1,131 @@
-/* ------------------------------------browse */
-/* 表格容器 */
-.table-container {
-    margin-top: 20px;
-    overflow-x: auto; /* 横向滚动支持 */
-    border-radius: 5px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+/* 页面外层背景 */
+.browse-page-wrapper {
+    padding: 30px 20px;
+    background-color: #f4f6f9;
+    min-height: calc(100vh - 70px);
 }
 
-/* 表格样式 */
-.styled-table {
-    width: 200%;
-    border-collapse: collapse;
-    margin: 20px 0;
+/* 核心卡片容器 */
+.table-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* 顶部控制栏 */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
     font-size: 14px;
-    text-align: center;
-    table-layout: fixed; /* 固定布局，确保列宽按CSS定义生效 */
+    color: #495057;
 }
 
-/* 表头样式 */
+.custom-select {
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin: 0 5px;
+    outline: none;
+}
+
+/* ★★★ 核心修复：允许表格横向滚动，解决拥挤 ★★★ */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* 开启横向滚动条 */
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* 表格主体样式 */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #212529;
+}
+
+/* ★★★ 表头：绝对不换行！ ★★★ */
 .styled-table th {
-    background-color: #2F5373; /* 表头背景色 */
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    position: sticky;
-    top: 0; /* 固定表头 */
-    text-align: center; /* 居中 */
-    z-index: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
+    white-space: nowrap !important; /* 强制表头在一行显示，绝不换行 */
+    padding: 12px 18px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    text-align: left;
 }
 
-/* 单元格样式 */
+/* 单元格：普通列默认不换行，超长显示省略号 */
 .styled-table td {
-    padding: 10px;
-    border: 1px solid #ddd; /* 单元格边框 */
-    text-align: center; /* 左对齐 */
-    vertical-align: top; /* 内容顶部对齐 */
+    padding: 12px 18px;
+    border-bottom: 1px solid #dee2e6;
+    white-space: nowrap; 
+    max-width: 200px; /* 限制最大宽度，超出的文字变省略号 */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.styled-table th:nth-child(10), /* 第9列（Phenotype Evidence） */
-.styled-table td:nth-child(10){    
-    width: 15%; /* 分配宽度 */
-    max-width: 1000px; /* 设置最大宽度 */
-    overflow: hidden; /* 超出部分隐藏 */
-    word-wrap: break-word; /* 自动换行 */
-    white-space: normal; /* 允许多行显示 */
-    text-align: left; /* 左对齐 */
-}
-.styled-table th:nth-child(9), /* 第9列（Phenotype Evidence） */
-.styled-table th:nth-child(9) {
-    width: 25%; /* 分配宽度 */
-    max-width: 1000px; /* 设置最大宽度 */
-    overflow: hidden; /* 超出部分隐藏 */
-    word-wrap: break-word; /* 自动换行 */
-    white-space: normal; /* 允许多行显示 */
-    text-align: left; /* 左对齐 */
+/* ★★★ 针对长文本列（如 Evidence），允许换行并设定最小宽度 ★★★ */
+.styled-table td.wrap-col {
+    white-space: normal !important; 
+    word-break: break-word;
+    min-width: 350px; /* 保证它有足够的宽度展示文字 */
 }
 
-/* 表格行固定最小高度 */
-.styled-table tbody tr {
-    min-height: 50px; /* 设置最小高度 */
+/* 斑马纹效果 */
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #fdfdfd;
 }
 
-/* 偶数行背景 */
-.styled-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* 偶数行背景色 */
-}
-
-/* 鼠标悬停行背景 */
 .styled-table tbody tr:hover {
-    background-color: #e0e0e0; /* 鼠标悬停背景色 */
-    transition: background-color 0.3s ease;
+    background-color: #f1f5fa; /* 鼠标悬停的高亮蓝灰色 */
 }
 
-/* 响应式样式 */
-@media screen and (max-width: 768px) {
-    .styled-table th:nth-child(9), /* 隐藏第9列 */
-    .styled-table td:nth-child(9),
-    .styled-table th:nth-child(10), /* 隐藏第10列 */
-    .styled-table td:nth-child(10) {
-        display: none;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        font-size: 12px; /* 缩小字体 */
-        padding: 8px; /* 减小内边距 */
-    }
+.styled-table a {
+    color: #0056b3;
+    text-decoration: none;
+}
+.styled-table a:hover {
+    text-decoration: underline;
 }
 
-/*分页按钮*/
-/* 分页控件容器 */
+/* 底部控制栏：分页 */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #495057;
+}
+
 .pagination-controls {
     display: flex;
-    justify-content: space-between; /* 按钮和分页信息两边对齐 */
-    align-items: center; /* 垂直居中 */
-    margin: 20px 0; /* 上下间距 */
-    padding: 0 20px; /* 两侧内边距 */
 }
 
-/* 分页按钮样式 */
 .pagination-btn {
-    padding: 8px 15px;
-    border: 1px solid #ddd;
-    background-color: #2F5373; /* 按钮背景色 */
-    color: white; /* 按钮文字颜色 */
-    border-radius: 5px;
-    font-size: 14px;
+    padding: 6px 14px;
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #007bff;
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    flex: 0; /* 防止按钮扩展宽度 */
 }
-
-/* 禁用按钮样式 */
+.pagination-btn:hover:not(:disabled) {
+    background-color: #e9ecef;
+}
 .pagination-btn:disabled {
+    color: #6c757d;
     cursor: not-allowed;
-    background-color: #cccccc; /* 禁用背景色 */
-    color: #666; /* 禁用文字颜色 */
+    background-color: #f8f9fa;
 }
 
-/* 分页信息样式 */
-.pagination-controls span {
-    font-size: 14px;
-    font-weight: bold;
-    color: #555;
-    text-align: center; /* 居中对齐 */
-    flex-grow: 1; /* 填充中间空间 */
+.pagination-info {
+    padding: 6px 14px;
+    border-top: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+    background-color: #007bff;
+    color: white;
 }

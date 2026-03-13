@@ -24,10 +24,22 @@ const loadbrowse = (tableName, currentPage = 1, rowsPerPage = 10) => {
             console.log("Data received from server:", data);
 
             // 根据表格名称设置字段顺序
+            // 根据用户要求，完整配置 Browse 页面的显示列
             const fieldOrder = tableName === "celltype"
-                ? ["CTID", "species", "tissue_class", "cancer_type", "cell_type", "cell_name", "Phenotype_type", "Phenotype_label", "Phenotype_evidence", "Paper_Title", "journal", "year","PMID"]
-                : ["SLID", "species", "tissue_class", "cancer_type", "spatial_layer", "Cell_type_composition",  "Phenotype_type", "Phenotype_label", "Phenotype_evidence", "Paper_Title", "journal", "year","PMID"];
-
+            ? [
+                "CTID", "species", "tissue_class", "tissue_type", "major_cancer_type", 
+                "cancer_type", "cancer_type_detail", "major_cell_type", "cell_type", 
+                "cell_name", "cell_marker", "PMID", "Paper_Title", "journal", "year", 
+                "Phenotype_type", "major_Phenotype_label", "Phenotype_label", 
+                "Phenotype_evidence"
+            ]
+            : [
+                "SLID", "species", "tissue_class", "tissue_type", "major_cancer_type", 
+                "cancer_type", "cancer_type_detail", "major_spatial_layer", "spatial_layer", 
+                "Cell_type_composition", "PMID", "Paper_Title", "journal", "year", 
+                "Phenotype_type", "major_Phenotype_label", "Phenotype_label", 
+                "Phenotype_evidence"
+            ];
             const tableHeaderFragment = document.createDocumentFragment();
             const tableBodyFragment = document.createDocumentFragment();
             // 格式化函数：将字段名从全大写改为首字母大写，并去掉下划线

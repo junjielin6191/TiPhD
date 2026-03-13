@@ -8,10 +8,11 @@ import json
 
 # --- 1. 配置和路径定义 ---
 FILE_PATHS = {
-    'celltype': './database/data/celltype.csv',
-    'spatial': './database/data/spatialayer.csv',
-    'tool': './database/data/tools.csv',
-    'experiment': './database/data/experiment.csv'
+    
+    'celltype': './TiAgent/Evidence_Agent/database/data/celltype.csv',
+    'spatial': './TiAgent/Evidence_Agent/database/data/spatialayer.csv',
+    'tool': './TiAgent/Evidence_Agent/database/data/tools.csv',
+    'experiment': './TiAgent/Evidence_Agent/database/data/experiment.csv'
 }
 JSON_OUTPUT_DIR = Path('./database/data/json/')
 

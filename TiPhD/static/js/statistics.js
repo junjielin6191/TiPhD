@@ -21,96 +21,89 @@ function loadStatistics(tableName) {
 }
 
 // 渲染图表
+// 渲染图表
 function renderCharts(data, tableName) {
     // 根据表名渲染不同的图表
     if (tableName === "celltype") {
-        // Cell Type Chart
-        if (data["cells type"]) {
+        // Cell Type Chart -> 对应 major_cell_type
+        if (data["major_cell_type"]) {
             Plotly.newPlot(
                 "cells-type-chart",
                 [
                     {
-                        x: Object.keys(data["cells type"]), // 横坐标
-                        y: Object.values(data["cells type"]), // 纵坐标
+                        x: Object.keys(data["major_cell_type"]), // 横坐标
+                        y: Object.values(data["major_cell_type"]), // 纵坐标
                         type: "bar", // 图表类型为柱状图
                         marker: {
-                            color: getRandomColors(Object.keys(data["cells type"]).length), // 生成随机颜色
+                            color: getRandomColors(Object.keys(data["major_cell_type"]).length), // 生成随机颜色
                         },
                     },
                 ],
                 {
-                    title: "Cell Type", // 图表标题
+                    title: "major cell type", // 图表标题
                     height: 400,
                     xaxis: {
-                        title: "Cell Type",
+                        title: "major cell type",
                         tickangle: -45, // 标签旋转45度
                         automargin: true, // 自动调整边距
-                        tickfont: {
-                            size: 10, // 调整字体大小
-                        },
+                        tickfont: { size: 10 }, // 调整字体大小
                     },
-                    yaxis: {
-                        title: "Count",
-                    },
+                    yaxis: { title: "Count" },
                 }
             );
         }
 
-        // Phenotype Label Chart
-        if (data["phenotype label"]) {
+        // Phenotype Label Chart -> 对应 major_Phenotype_label
+        if (data["major_Phenotype_label"]) {
             Plotly.newPlot(
                 "phenotype-label-chart",
                 [
                     {
-                        labels: Object.keys(data["phenotype label"]),
-                        values: Object.values(data["phenotype label"]),
+                        labels: Object.keys(data["major_Phenotype_label"]),
+                        values: Object.values(data["major_Phenotype_label"]),
                         type: "pie",
                     },
                 ],
-                { title: "Phenotype Label", height: 430 }
+                { title: "major Phenotype label", height: 430 }
             );
         }
 
-        // major cancer type Chart
-        if (data["major cancer type"]) {
+        // major cancer type Chart -> 对应 major_cancer_type
+        if (data["major_cancer_type"]) {
             Plotly.newPlot(
                 "main-cancer-type-chart",
                 [
                     {
-                        x: Object.keys(data["major cancer type"]),
-                        y: Object.values(data["major cancer type"]),
+                        x: Object.keys(data["major_cancer_type"]),
+                        y: Object.values(data["major_cancer_type"]),
                         type: "bar",
                         marker: {
-                            color: getRandomColors(Object.keys(data["major cancer type"]).length), // 生成随机颜色
+                            color: getRandomColors(Object.keys(data["major_cancer_type"]).length), // 生成随机颜色
                         },                        
                     },
                 ],
                 {
-                    title: "Cancer Type",
+                    title: "major cancer type",
                     height: 400,
                     xaxis: {
-                        title: "Cancer Type",
+                        title: "major cancer type",
                         tickangle: -45, // 标签旋转45度
                         automargin: true, // 自动调整边距
-                        tickfont: {
-                            size: 10, // 调整字体大小
-                        },
+                        tickfont: { size: 10 }, // 调整字体大小
                     },
-                    yaxis: {
-                        title: "Count",
-                    },
+                    yaxis: { title: "Count" },
                 }
             );            
         }
 
-        // Phenotype Type Chart
-        if (data["phenotype type"]) {
+        // Phenotype Type Chart -> 对应 Phenotype_type
+        if (data["Phenotype_type"]) {
             Plotly.newPlot(
                 "phenotype-type-chart",
                 [
                     {
-                        labels: Object.keys(data["phenotype type"]),
-                        values: Object.values(data["phenotype type"]),
+                        labels: Object.keys(data["Phenotype_type"]),
+                        values: Object.values(data["Phenotype_type"]),
                         type: "pie",
                     },
                 ],
@@ -118,7 +111,7 @@ function renderCharts(data, tableName) {
             );
         }
 
-        // Heatmap Chart
+        // Heatmap Chart -> 保持不变
         if (data["heatmap"]) {
             Plotly.newPlot(
                 "heatmap-chart",
@@ -137,9 +130,9 @@ function renderCharts(data, tableName) {
                     },
                 ],
                 {
-                    title: "Cancer Type - Cell Heatmap",
-                    xaxis: { title: "Cell Name", tickangle: -45, automargin: true },
-                    yaxis: { title: "Cancer Type", automargin: true },
+                    title: "major cancer type - major cell type Heatmap",
+                    xaxis: { title: "major cell type", tickangle: -45, automargin: true },
+                    yaxis: { title: "major cancer type", automargin: true },
                     height: 600,
                 }
             );
@@ -147,79 +140,75 @@ function renderCharts(data, tableName) {
     } 
     
     else if (tableName === "spatiallayer") {
-        // Spatial Layer Chart - 使用扇形图展示
-        if (data["spatial layer"]) {
+        // Spatial Layer Chart -> 对应 major_spatial_layer
+        if (data["major_spatial_layer"]) {
             Plotly.newPlot(
                 "spatial-layer-chart",
                 [
                     {
-                        labels: Object.keys(data["spatial layer"]), // 扇形图的标签
-                        values: Object.values(data["spatial layer"]), // 扇形图的值
+                        labels: Object.keys(data["major_spatial_layer"]), // 扇形图的标签
+                        values: Object.values(data["major_spatial_layer"]), // 扇形图的值
                         type: "pie", // 图表类型设置为 pie
                     },
                 ],
                 {
-                    title: "Spatial Layer", // 图表标题
+                    title: "major spatial layer", // 图表标题
                     height: 400,
                 }
             );
         }
     
-        // major cancer type Chart
-        if (data["major cancer type"]) {
+        // major cancer type Chart -> 对应 major_cancer_type
+        if (data["major_cancer_type"]) {
             Plotly.newPlot(
                 "main-cancer-type-chart",
                 [
                     {
-                        x: Object.keys(data["major cancer type"]),
-                        y: Object.values(data["major cancer type"]),
+                        x: Object.keys(data["major_cancer_type"]),
+                        y: Object.values(data["major_cancer_type"]),
                         type: "bar",
                         marker: {
-                            color: getRandomColors(Object.keys(data["major cancer type"]).length), // 生成随机颜色
+                            color: getRandomColors(Object.keys(data["major_cancer_type"]).length), // 生成随机颜色
                         }, 
                     },
                 ],
                 {
-                    title: "Cancer Type",
+                    title: "major cancer type",
                     height: 400,
                     xaxis: {
-                        title: "Cancer Type",
+                        title: "major cancer type",
                         tickangle: -45, // 标签旋转45度
                         automargin: true, // 自动调整边距
-                        tickfont: {
-                            size: 10, // 调整字体大小
-                        },
+                        tickfont: { size: 10 }, // 调整字体大小
                     },
-                    yaxis: {
-                        title: "Count",
-                    },
+                    yaxis: { title: "Count" },
                 }
             );
         }
     
-        // Phenotype Label Chart
-        if (data["phenotype label"]) {
+        // major Phenotype label Chart -> 对应 major_Phenotype_label
+        if (data["major_Phenotype_label"]) {
             Plotly.newPlot(
                 "phenotype-label-chart",
                 [
                     {
-                        labels: Object.keys(data["phenotype label"]),
-                        values: Object.values(data["phenotype label"]),
+                        labels: Object.keys(data["major_Phenotype_label"]),
+                        values: Object.values(data["major_Phenotype_label"]),
                         type: "pie",
                     },
                 ],
-                { title: "Phenotype Label", height: 430 }
+                { title: "major Phenotype label", height: 430 }
             );
         }
     
-        // Phenotype Type Chart
-        if (data["phenotype type"]) {
+        // Phenotype Type Chart -> 对应 Phenotype_type
+        if (data["Phenotype_type"]) {
             Plotly.newPlot(
                 "phenotype-type-chart",
                 [
                     {
-                        labels: Object.keys(data["phenotype type"]),
-                        values: Object.values(data["phenotype type"]),
+                        labels: Object.keys(data["Phenotype_type"]),
+                        values: Object.values(data["Phenotype_type"]),
                         type: "pie",
                     },
                 ],
@@ -227,7 +216,7 @@ function renderCharts(data, tableName) {
             );
         }
     
-        // Heatmap Chart
+        // Heatmap Chart -> 保持不变
         if (data["heatmap"]) {
             Plotly.newPlot(
                 "heatmap-chart",
@@ -246,20 +235,20 @@ function renderCharts(data, tableName) {
                     },
                 ],
                 {
-                    title: "Cancer Type - Spatial Layer Heatmap",
-                    xaxis: { title: "Spatial Layer", tickangle: -45, automargin: true },
-                    yaxis: { title: "Cancer Type", automargin: true },
+                    title: "major cancer type - major spatial layer Heatmap",
+                    xaxis: { title: "major spatial layer", tickangle: -45, automargin: true },
+                    yaxis: { title: "major cancer type", automargin: true },
                     height: 600,
                 }
             );
         }
     }
     
-    
     else {
         console.error(`No rendering logic defined for tableName: ${tableName}`);
     }
 }
+
 // 随机颜色生成函数
 function getRandomColors(length) {
     const colors = [];

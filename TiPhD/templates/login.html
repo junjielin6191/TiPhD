@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Log In - TiPhD{% endblock %}
+{% block content %}
+<div style="max-width: 400px; margin: 80px auto; padding: 30px; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Welcome Back</h2>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div style="color: red; margin-bottom: 15px; text-align: center; font-size: 14px;">
+            {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="/login">
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #555;">Email Address</label>
+            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; color: #555;">Password</label>
+            <input type="password" name="password" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <button type="submit" style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Log In</button>
+    </form>
+    <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
+        Don't have an account? <a href="/register" style="color: #007bff; text-decoration: none;">Sign Up</a>
+    </p>
+</div>
+{% endblock %}

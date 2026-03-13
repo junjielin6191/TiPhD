@@ -3,13 +3,20 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
+import os
 
-# 创建数据库连接
+# ----------------- 修复核心：使用绝对路径 -----------------
+# 获取当前 database.py 所在的绝对路径目录
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# 拼接出固定不变的绝对路径：/home/ljj/TiPhD/TiPhD/database.db
+DB_PATH = os.path.join(BASE_DIR, 'database.db')
+
 Base = declarative_base()
-engine = create_engine('sqlite:///database.db')
+# 注意：sqlite 绝对路径需要 4 个斜杠 (sqlite:////...)
+engine = create_engine(f'sqlite:///{DB_PATH}')
 Session = sessionmaker(bind=engine)
 session = Session()
-
+# --------------------------------------------------------
 # 定义 SpatialLayer 表
 
 class SpatialLayer(Base):
@@ -221,13 +228,13 @@ def flatten_entry(entry):
 
 
 # #加载 SpatialLayer 数据
-# spatial_csv_path = '/mnt/data/ljj/Project_TiPhD/111/data/spatialayer.csv'
+# spatial_csv_path = './TiPhD/data/spatialayer.csv'
 # load_data_to_table(spatial_csv_path, SpatialLayer, 'SLID')
 
 
 
 # # 加载 CellType 数据
-# cell_csv_path = '/mnt/data/ljj/Project_TiPhD/111/data/celltype.csv'
+# cell_csv_path = './TiPhD/data/celltype.csv'
 # load_data_to_table(cell_csv_path, CellType, 'CTID')
 
 # # 示例查询 SpatialLayer

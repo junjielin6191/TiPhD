@@ -21,7 +21,8 @@ except ImportError:
     # 注意：我们在这里不退出，允许代码在没有 faiss 的情况下运行并保存 JSON
     
 # --- 1. 配置和路径定义 ---
-JSON_INPUT_DIR = Path('./database/data/json')
+
+JSON_INPUT_DIR = Path('./TiAgent/Evidence_Agent/database/data/json')
 JSON_FILE_NAMES = {
     'celltype': 'celltype_records.json',
     'spatial': 'spatial_records.json',

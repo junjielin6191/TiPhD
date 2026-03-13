@@ -33,7 +33,6 @@ EMBEDDING_MODEL = 'text-embedding-3-large'
 REASONING_MODEL = "gpt-4o" # Reasoning Agent and Translation Agent Model
 
 # 🛠️ User provided API Configuration
-# Note: You should replace this with your actual, private API key if running outside the provided environment
 API_KEY = "sk-GBBQQWHSKHU76HFS5tsHmmffzbQi1dnLy5VdnPU6Kp9gtm3n"
 API_BASE = "https://api.bianxie.ai/v1" 
 
@@ -126,13 +125,11 @@ def process_query_for_llm(client: OpenAI, query: str, history: List[Dict[str, st
         )
         
         # 3. Python 侧的鲁棒性处理：正则提取 JSON
-        # 即使模型输出了 ```json ... ``` 或其他杂质，正则也能把最外层的 {} 抓出来
         match = re.search(r"\{.*\}", response_str, re.DOTALL)
         if match:
             clean_json_str = match.group(0)
             translation_info = json.loads(clean_json_str)
         else:
-            # 如果正则都没找到 {}，那说明模型彻底崩了，抛出异常进入下面的 except
             raise ValueError("No JSON object found in LLM response")
         
         # 验证关键键
@@ -156,19 +153,13 @@ def process_query_for_llm(client: OpenAI, query: str, history: List[Dict[str, st
 def translate_answer_to_original(client: OpenAI, english_answer: str, target_language_code: str) -> str:
     """
     根据用户的原始语言代码，决定是翻译还是直接返回英文答案。
-    
-    如果 target_language_code 是 'en' 或 'english'，则直接返回英文答案。
-    否则，执行翻译流程。
     """
-    
-    # *** 关键：判断是否需要翻译 ***
     if target_language_code.lower() in ['en', 'english']:
         print("    - 目标语言为英文，跳过翻译步骤。")
         return english_answer 
         
     print(f"    - 目标语言为 '{target_language_code}'，执行翻译。")
     
-    # 设置翻译 Agent 的系统提示，要求翻译到目标语言
     system_prompt = (
         f"You are a professional Translation Agent. Translate the provided English biological RAG answer precisely and naturally into the language corresponding to the code '{target_language_code}'. "
         "Strictly preserve all formatting (markdown, lists, tables), and keep all internal references (like [ID: SL001], PMIDs, links) exactly in their original location. "
@@ -182,7 +173,6 @@ def translate_answer_to_original(client: OpenAI, english_answer: str, target_lan
     ]
     
     try:
-        # Translation does not require JSON output
         return llm_call_with_retry(client, messages, response_format={"type": "text"})
     except Exception as e:
         print(f"❌ Language Agent (Answer Translation) failed: {e}. Returning English answer with a warning.")
@@ -208,7 +198,7 @@ def load_rag_assets():
     except Exception as e:
         print(f"❌ 错误: 无法加载 RAG 资产文件。请先运行 chrunk.py 生成资产。错误信息: {e}")
         if isinstance(e, FileNotFoundError):
-             print(f"    - 缺失文件: 请检查 {VECTOR_INDEX_FILE}, {ID_MAP_FILE}, {RAG_DATA_JSON} 是否存在。")
+             print(f"    - 缺失文件: 请检查 {VECTOR_INDEX_FILE}, {ID_MAP_FILE}, {RAG_DATA_JSON} 是否存在。")
         raise
 
 
@@ -216,8 +206,6 @@ def load_rag_assets():
 def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index, id_map: list, rag_data: list, history: List[Dict[str, str]]) -> Tuple[str, List[Dict[str, str]]]:
     """
     Executes the RAG Multi-Agent flow: Translation -> Orchestration -> Retrieval -> Reasoning -> Validation -> Translation.
-    
-    The internal chat_history stores ENGLISH messages for consistent context for the LLM agents.
     """
     
     # 1. --- [Agent X] Language Processing Agent (Translate/Detect) ---
@@ -231,13 +219,11 @@ def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index,
 
     # 2. --- [Agent 1] Orchestrator Agent (Routing) ---
     print("\n--- Starting Orchestrator Agent (Routing Decision) ---")
-    # Pass the English query and the English history
     routing_decision = orchestrate_query(openai_client, english_query, history) 
     
     if not routing_decision:
         print("❌ Orchestrator failed to route or returned an invalid decision. Process aborted.")
         error_msg_en = "Routing failed. The knowledge retrieval process was aborted."
-        # 返回翻译后的错误信息
         return translate_answer_to_original(openai_client, error_msg_en, original_language), history
 
     target_agents = routing_decision.get("target_agents", [])
@@ -255,7 +241,6 @@ def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index,
     if not target_agents:
         print("⚠️ Orchestrator did not identify target agents. Process aborted.")
         error_msg_en = "No target knowledge base agent was identified, retrieval cannot be performed."
-        # 返回翻译后的错误信息
         return translate_answer_to_original(openai_client, error_msg_en, original_language), history
     else:
         print("\n--- Starting Expert Retrieval Agent ---")
@@ -264,20 +249,18 @@ def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index,
 
             source_table = KNOWLEDGE_BASE_MAP[agent_name]['source_table']
             
-            # Call the expert Agent's retrieval function
             chunks = retrieve_chunks(
                 client=openai_client, 
-                query=search_query, # Use the English search_query
+                query=search_query, 
                 index=index, 
                 id_map=id_map, 
                 rag_data=rag_data, 
                 source_table=source_table,
                 metadata_filter=metadata_filter,
-                k=5  # Retrieve 5 chunks per agent
+                k=5  
             )
             all_retrieved_chunks.extend(chunks)
 
-        # Integrate retrieval results, sort by distance, and deduplicate
         unique_chunks_map = {chunk['chunk_id']: chunk for chunk in all_retrieved_chunks}
         sorted_unique_chunks = sorted(unique_chunks_map.values(), key=lambda x: x['distance'])
         
@@ -285,8 +268,6 @@ def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index,
 
         # 4. --- [Agent 4] Answer Generation Agent (Reasoning Agent) ---
         print("\n--- Starting Reasoning Agent (Answer Generation in EN) ---")
-        # Reasoning Agent returns an English answer
-        # Note: Must pass the ENGLISH search_query
         reasoning_answer_en = generate_answer(openai_client, search_query, sorted_unique_chunks, history) 
         
         # 5. --- [Agent 5] Validation Agent (Review and Citation in EN) ---
@@ -296,25 +277,62 @@ def run_rag_pipeline(openai_client: OpenAI, user_input: str, index: faiss.Index,
         # 6. --- [Agent X] Language Processing Agent (Final Translation) ---
         print(f"\n--- Starting Language Agent (Final Output Language: {original_language}) ---")
         
-        # *** 关键：调用翻译函数，根据 original_language 决定是否翻译 ***
         final_answer_translated = translate_answer_to_original(openai_client, english_answer, original_language)
         
-        
-        # --- Update History: Store the ENGLISH conversation for subsequent LLM context ---
-        # 仅将翻译后的查询和最终英文答案存储到历史中
+        # --- Update History ---
         new_history = history.copy()
         new_history.append({"role": "user", "content": english_query})
         new_history.append({"role": "assistant", "content": english_answer})
         
-        # Simple history truncation strategy (Optional): keep only the last N pairs
         MAX_HISTORY_PAIRS = 5
         if len(new_history) > MAX_HISTORY_PAIRS * 2:
             new_history = new_history[-MAX_HISTORY_PAIRS * 2:]
 
         return final_answer_translated, new_history
 
-    # Should be unreachable
     return "发生未知错误。", history 
+
+
+# =====================================================================
+# 🌟 新增：供总控 (tiagent_master.py) 调用的统一入口函数
+# =====================================================================
+_cached_index = None
+_cached_id_map = None
+_cached_rag_data = None
+_cached_openai_client = None
+
+def run_evidence_agent(query: str) -> str:
+    """
+    接收 master 传来的标准化 query，执行 RAG 检索并返回最终字符串结果。
+    """
+    global _cached_index, _cached_id_map, _cached_rag_data, _cached_openai_client
+    
+    # 1. 全局缓存加载：保证巨大的 FAISS 索引在整个网站运行期间只加载一次
+    if _cached_index is None:
+        print("📦 [Evidence Agent] 正在初始化本地知识库资产...")
+        if faiss is None:
+            return "❌ 错误: FAISS 库未安装，无法执行 RAG 检索。"
+        _cached_index, _cached_id_map, _cached_rag_data = load_rag_assets()
+        _cached_openai_client = OpenAI(api_key=API_KEY, base_url=API_BASE)
+        
+    # 2. 调用核心 RAG 流程
+    # 此时 query 已经是 master 经过语义消解的英文检索词，所以 history 传空即可
+    try:
+        final_answer, _ = run_rag_pipeline(
+            openai_client=_cached_openai_client, 
+            user_input=query, 
+            index=_cached_index, 
+            id_map=_cached_id_map, 
+            rag_data=_cached_rag_data, 
+            history=[]  
+        )
+        return final_answer
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return f"Evidence Agent 检索过程中发生错误: {str(e)}"
+
+# =====================================================================
 
 
 if __name__ == "__main__":
@@ -332,7 +350,6 @@ if __name__ == "__main__":
 
     # --- Start Multi-turn Conversation Loop ---
     session_id = f"session-{os.getpid()}-{os.urandom(4).hex()}" 
-    # History stores ENGLISH version of the conversation for internal LLM context
     chat_history: List[Dict[str, str]] = [] 
     
     print("\n========================================================")
@@ -342,10 +359,8 @@ if __name__ == "__main__":
     print("输入 'exit' 或 'quit' 退出。")
     print("========================================================\n")
 
-    # Core: Conversation input entry point (while True loop)
     while True:
         try:
-            # Use input() to receive user input
             user_input = input("👤 用户查询: ").strip()
 
             if user_input.lower() in ['exit', 'quit']:
@@ -355,7 +370,6 @@ if __name__ == "__main__":
             if not user_input:
                 continue
 
-            # Execute RAG flow and receive the updated history
             final_answer_translated, chat_history = run_rag_pipeline(
                 openai_client, 
                 user_input, 
@@ -365,17 +379,10 @@ if __name__ == "__main__":
                 chat_history 
             )
 
-            # Print the final translated result
             if final_answer_translated:
                 print("\n========================================================")
-                
-                # 从 chat_history 中找到 LLM 成功检测的语言代码
-                # 如果检测失败，语言代码会回退到 'zh'（如果包含中文）或 'en'
-                # 即使 LLM 失败，我们现在也能正确打印出目标语言代码，并判断是否需要翻译
                 detected_lang = chat_history[-2]['content'] if len(chat_history) >= 2 else 'en'
                 is_translated = detected_lang.lower() not in ['en', 'english']
-                
-                # 检查翻译是否失败的回退信息
                 output_label = "最终回答 (已翻译)" if is_translated and "Translation Failed" not in final_answer_translated else "最终回答 (EN)"
                 
                 print(f"🤖 {output_label}:")
@@ -387,7 +394,6 @@ if __name__ == "__main__":
             print("\n👋 退出 RAG 聊天机器人。")
             break
         except Exception as e:
-            # Print detailed traceback to prevent hiding errors
             import traceback
             print(f"❌ 发生意外错误: {e}")
             traceback.print_exc()
