@@ -33,7 +33,7 @@ JSON_FILE_NAMES = {
 # 🛠️ 关键配置：text-embedding-3-large 模型参数
 EMBEDDING_MODEL = 'text-embedding-3-large'
 EMBEDDING_DIMENSION = 3072  
-VECTOR_INDEX_FILE = 'rag_knowledge_index.faiss'
+VECTOR_INDEX_FILE = './TiAgent/Evidence_Agent/rag_knowledge_index.faiss'
 RAG_DATA_JSON = './TiAgent/Evidence_Agent/rag_knowledge_data.json'
 
 # ⚠️ 用户提供的配置，覆盖环境变量，用于知识块生成和向量化
@@ -91,17 +91,17 @@ def generate_rag_chunks(data):
         # B. 生物背景 (物种, 组织, 癌症类型)
         context_info = (
             f"物种: {row.get('species', 'N/A')}, 组织类型: {row.get('tissue_class', 'N/A')}/{row.get('tissue_type', 'N/A')}. "
-            f"主要癌症类型: {row.get('main_cancer_type', 'N/A')}, 详细癌症类型: {row.get('cancer_type_detail', 'N/A')}."
+            f"主要癌症类型: {row.get('major_cancer_type', 'N/A')}, 详细癌症类型: {row.get('cancer_type_detail', 'N/A')}."
         )
         # C. 细胞详情 (大类, 小类, 标志物)
         cell_info = (
-            f"细胞大类: {row.get('big_cell_type', 'N/A')}, 细胞小类: {row.get('major_cell_type', 'N/A')}, "
+            f"细胞大类: {row.get('major_cell_type', 'N/A')}, 细胞小类: {row.get('major_cell_type', 'N/A')}, "
             f"具体细胞名称: {row.get('cell_name', 'N/A')}. "
             f"关键细胞标志物: {row.get('cell_marker', 'N/A')}."
         )
         # D. 表型与结果 (类型, 标签, 关联)
         phenotype_info = (
-            f"表型类型: {row.get('Phenotype_type', 'N/A')}, 主要表型标签: {row.get('main_Phenotype_label', 'N/A')}, "
+            f"表型类型: {row.get('Phenotype_type', 'N/A')}, 主要表型标签: {row.get('major_Phenotype_label', 'N/A')}, "
             f"具体表型结果: {row.get('Phenotype_label', 'N/A')}, 如何影响表型: {row.get('Association_Type', 'N/A')}."
         )
         # E. 研究方法和证据类型 (发现, 验证, 样本)
@@ -116,7 +116,7 @@ def generate_rag_chunks(data):
         chunk_text = f"实体类型: 细胞表型. {identity_info} {context_info} {cell_info} {phenotype_info} {method_info} {evidence_info}"
         metadata = {
             "chunk_id": row.get('chunk_id'), "source_table": "CellType_Phenotype", 
-            "main_cancer_type": row.get('main_cancer_type'), "cell_name": row.get('cell_name'), "PMID": row.get('PMID'),
+            "major_cancer_type": row.get('major_cancer_type'), "cell_name": row.get('cell_name'), "PMID": row.get('PMID'),
             "year": row.get('year'), "Technology_Type_for_Discovery": row.get('Technology_Type_for_Discovery'), "Technology_Type_for_validation": row.get('Technology_Type_for_validation')
         }
         rag_knowledge_base.append({"chunk_id": row.get('chunk_id'), "text": chunk_text, "metadata": metadata})
@@ -124,15 +124,15 @@ def generate_rag_chunks(data):
     # --- 2. Spatial_Phenotype 知识块生成 ---
     for row in data.get('spatial', []):
         identity_info = (f"PMID: {row.get('PMID', 'N/A')}, 文献标题: {row.get('Paper_Title', 'N/A')}, 期刊: {row.get('journal', 'N/A')}, 研究年份: {row.get('year', 'N/A')}." )
-        context_info = (f"物种: {row.get('species', 'N/A')}, 组织类型: {row.get('tissue_class', 'N/A')}/{row.get('tissue_type', 'N/A')}. 主要癌症类型: {row.get('main_cancer_type', 'N/A')}, 详细癌症类型: {row.get('cancer_type_detail', 'N/A')}." )
-        spatial_info = (f"主要空间层级: {row.get('main_spatial_layer', 'N/A')}, 具体空间结构名称: {row.get('spatial_layer', 'N/A')}. 组成细胞类型: {row.get('Cell_type_composition', 'N/A')}." )
-        phenotype_info = (f"表型类型: {row.get('Phenotype_type', 'N/A')}, 主要表型: {row.get('main_Phenotype_label', 'N/A')}, 具体表型: {row.get('Phenotype_label', 'N/A')}." )
+        context_info = (f"物种: {row.get('species', 'N/A')}, 组织类型: {row.get('tissue_class', 'N/A')}/{row.get('tissue_type', 'N/A')}. 主要癌症类型: {row.get('major_cancer_type', 'N/A')}, 详细癌症类型: {row.get('cancer_type_detail', 'N/A')}." )
+        spatial_info = (f"主要空间层级: {row.get('major_spatial_layer', 'N/A')}, 具体空间结构名称: {row.get('spatial_layer', 'N/A')}. 组成细胞类型: {row.get('Cell_type_composition', 'N/A')}." )
+        phenotype_info = (f"表型类型: {row.get('Phenotype_type', 'N/A')}, 主要表型: {row.get('major_Phenotype_label', 'N/A')}, 具体表型: {row.get('Phenotype_label', 'N/A')}." )
         method_info = (f"发现技术: {row.get('technology_type_for_discovery', 'N/A')}.验证技术类型: {row.get('technology_type_for_validation', 'N/A')}. 证据级别: {row.get('evidence_type', 'N/A')}." )
         evidence_info = f"核心证据描述: \"{row.get('Phenotype_evidence', '无')}\""
         chunk_text = f"实体类型: 空间层级表型. {identity_info} {context_info} {spatial_info} {phenotype_info} {method_info} {evidence_info}"
         metadata = {
             "chunk_id": row.get('chunk_id'), "source_table": "Spatial_Phenotype", 
-            "main_cancer_type": row.get('main_cancer_type'), "spatial_layer": row.get('main_spatial_layer'), 
+            "major_cancer_type": row.get('major_cancer_type'), "spatial_layer": row.get('major_spatial_layer'), 
             "PMID": row.get('PMID'), "year": row.get('year'), "technology": row.get('technology_type_for_discovery'), "Technology_Type_for_validation": row.get('Technology_Type_for_validation')
         }
         rag_knowledge_base.append({"chunk_id": row.get('chunk_id'), "text": chunk_text, "metadata": metadata})
@@ -235,11 +235,11 @@ def create_openai_embeddings_and_indexing(rag_data):
             faiss.write_index(index, VECTOR_INDEX_FILE)
             
             # 保存 chunk_id 映射
-            with open('faiss_id_map.json', 'w', encoding='utf-8') as f:
+            with open('./TiAgent/Evidence_Agent/faiss_id_map.json', 'w', encoding='utf-8') as f:
                 json.dump(chunk_id_map, f, ensure_ascii=False, indent=2)
 
             print(f"🎉 向量索引创建成功！索引文件保存于：{VECTOR_INDEX_FILE}")
-            print(f"   ID 映射文件保存于：faiss_id_map.json")
+            print(f"   ID 映射文件保存于：./TiAgent/Evidence_Agent/faiss_id_map.json")
     
     # 5. 保存 RAG 原始数据
     with open(RAG_DATA_JSON, 'w', encoding='utf-8') as f:
