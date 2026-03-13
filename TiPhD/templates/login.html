@@ -6,25 +6,94 @@
     
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <div style="color: red; margin-bottom: 15px; text-align: center; font-size: 14px;">
-            {{ messages[0] }}
-        </div>
+        <div style="color: red; margin-bottom: 15px; text-align: center; font-size: 14px;">{{ messages[0] }}</div>
       {% endif %}
     {% endwith %}
+    <div id="js-message" style="display:none; margin-bottom: 15px; text-align: center; font-size: 14px;"></div>
 
     <form method="POST" action="/login">
         <div style="margin-bottom: 15px;">
             <label style="display: block; margin-bottom: 5px; color: #555;">Email Address</label>
-            <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
         </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; color: #555;">Image Captcha</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="text" id="img-captcha" required placeholder="Enter letters/digits" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                <img id="captcha-img" src="" alt="captcha" style="height: 40px; cursor: pointer; border: 1px solid #eee; border-radius: 4px;" title="Click to refresh">
+            </div>
+        </div>
+
         <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 5px; color: #555;">Password</label>
-            <input type="password" name="password" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+            <label style="display: block; margin-bottom: 5px; color: #555;">Email Code</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" name="code" required placeholder="6-digit code" maxlength="6" style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                <button type="button" id="send-code-btn" style="padding: 10px 15px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; color: #333;">Send Code</button>
+            </div>
         </div>
-        <button type="submit" style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Log In</button>
+
+        <button type="submit" style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">Log In (No Password Required)</button>
     </form>
     <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #666;">
         Don't have an account? <a href="/register" style="color: #007bff; text-decoration: none;">Sign Up</a>
     </p>
 </div>
+
+<script>
+async function loadCaptcha() {
+    try {
+        const res = await fetch('/api/captcha');
+        const data = await res.json();
+        document.getElementById('captcha-img').src = data.captcha_image;
+    } catch (e) { console.error('Failed to load captcha'); }
+}
+
+document.addEventListener('DOMContentLoaded', loadCaptcha);
+document.getElementById('captcha-img').addEventListener('click', loadCaptcha);
+
+document.getElementById('send-code-btn').addEventListener('click', async function() {
+    const email = document.getElementById('email').value;
+    const captcha = document.getElementById('img-captcha').value;
+    const msgBox = document.getElementById('js-message');
+    
+    if (!email || !captcha) {
+        msgBox.style.display = 'block'; msgBox.style.color = 'red';
+        msgBox.innerText = 'Please enter email and image captcha first.';
+        return;
+    }
+
+    const btn = this;
+    btn.disabled = true;
+    let countdown = 60;
+    
+    try {
+        const res = await fetch('/api/send_code', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email, captcha: captcha, action: 'login'}) // 指定为登录
+        });
+        const data = await res.json();
+        msgBox.style.display = 'block';
+        
+        if (res.ok) {
+            msgBox.style.color = 'green'; msgBox.innerText = data.message;
+            const timer = setInterval(() => {
+                btn.innerText = `${countdown}s`; countdown--;
+                if (countdown < 0) {
+                    clearInterval(timer); btn.disabled = false; btn.innerText = 'Send Code';
+                }
+            }, 1000);
+        } else {
+            msgBox.style.color = 'red'; msgBox.innerText = data.error;
+            btn.disabled = false;
+            loadCaptcha();
+        }
+    } catch (err) {
+        msgBox.style.display = 'block'; msgBox.style.color = 'red';
+        msgBox.innerText = 'Network error. Try again.';
+        btn.disabled = false;
+    }
+});
+</script>
 {% endblock %}

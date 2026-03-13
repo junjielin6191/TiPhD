@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 1. 加载左侧会话列表
+// 1. 加载左侧会话列表
 async function loadSessionList() {
     try {
         const response = await fetch('/api/sessions/list');
@@ -40,10 +41,18 @@ async function loadSessionList() {
         sessions.forEach(session => {
             const li = document.createElement('li');
             li.textContent = session.title || "Conversation";
-            li.dataset.id = session.id; // 【关键修复1】给每个 li 绑定独立 ID
+            li.dataset.id = session.id; 
+            
+            // 如果是当前正在聊天的会话
             if (session.id === currentSessionId) {
                 li.classList.add('active');
+                // 🌟 【丝滑体验核心】同步更新右侧顶部的标题栏
+                const headerTitle = document.getElementById('current-chat-title');
+                if (headerTitle) {
+                    headerTitle.textContent = session.title;
+                }
             }
+            
             li.onclick = () => loadSessionHistory(session.id, li.textContent);
             listUl.appendChild(li);
         });

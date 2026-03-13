@@ -14,7 +14,7 @@ FILE_PATHS = {
     'tool': './TiAgent/Evidence_Agent/database/data/tools.csv',
     'experiment': './TiAgent/Evidence_Agent/database/data/experiment.csv'
 }
-JSON_OUTPUT_DIR = Path('./database/data/json/')
+JSON_OUTPUT_DIR = Path('./TiAgent/Evidence_Agent/database/data/json/')
 
 # --- 2. 辅助函数（与结构化数据库部分保持一致） ---
 

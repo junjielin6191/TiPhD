@@ -1,7 +1,7 @@
 [
     {
         "db_id": 1,
-        "chunk_id": "EX_82daa002",
+        "chunk_id": "EX_8cfc65a2",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Spatial Transcriptomics Analysis",
         "Methodology": "10x Genomics Visium",
@@ -10,7 +10,7 @@
     },
     {
         "db_id": 2,
-        "chunk_id": "EX_4766d1fa",
+        "chunk_id": "EX_120375f3",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Immunohistochemistry (IHC) & Immunofluorescence",
         "Methodology": "IHC, fluorescence microscopy",
@@ -19,7 +19,7 @@
     },
     {
         "db_id": 3,
-        "chunk_id": "EX_b8781db3",
+        "chunk_id": "EX_61e92ae0",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Mouse Tumor Model Experiments",
         "Methodology": "Fluorescent labeling in vivo",
@@ -28,7 +28,7 @@
     },
     {
         "db_id": 4,
-        "chunk_id": "EX_b3c96d1c",
+        "chunk_id": "EX_f11948a7",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Survival Analysis with Clinical Data",
         "Methodology": "Kaplan-Meier, regression analysis",
@@ -37,7 +37,7 @@
     },
     {
         "db_id": 5,
-        "chunk_id": "EX_a51dfc16",
+        "chunk_id": "EX_0e744eaa",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Laser Capture Microdissection + RNA-seq",
         "Methodology": "LCM, RNA-seq",
@@ -46,7 +46,7 @@
     },
     {
         "db_id": 6,
-        "chunk_id": "EX_c69001bb",
+        "chunk_id": "EX_ff3231b2",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Gene Editing (CRISPR/shRNA)",
         "Methodology": "CRISPR knockout of stroma-related genes",
@@ -55,7 +55,7 @@
     },
     {
         "db_id": 7,
-        "chunk_id": "EX_9550c1d2",
+        "chunk_id": "EX_6fbbed64",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "In Situ Hybridization (FISH/RNAScope)",
         "Methodology": "RNA/DNA probes",
@@ -64,7 +64,7 @@
     },
     {
         "db_id": 8,
-        "chunk_id": "EX_70cd4218",
+        "chunk_id": "EX_c2dfca2e",
         "Spatiallayer": "Cell Co-Localization",
         "Experimental_Design": "Flow Cytometry or CyTOF",
         "Methodology": "Multi-parameter cell sorting",
@@ -73,7 +73,7 @@
     },
     {
         "db_id": 9,
-        "chunk_id": "EX_be3cbc5c",
+        "chunk_id": "EX_e10dd461",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "Single-Cell RNA Sequencing (scRNA-seq)",
         "Methodology": "scRNA-seq",
@@ -82,7 +82,7 @@
     },
     {
         "db_id": 10,
-        "chunk_id": "EX_cdf11863",
+        "chunk_id": "EX_10832222",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "Protein Interaction Validation",
         "Methodology": "Co-IP + LC-MS/MS, PLA",
@@ -91,7 +91,7 @@
     },
     {
         "db_id": 11,
-        "chunk_id": "EX_dd7917e8",
+        "chunk_id": "EX_3f4f84fc",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "In Vitro Functional Validation",
         "Methodology": "Transwell assay",
@@ -100,7 +100,7 @@
     },
     {
         "db_id": 12,
-        "chunk_id": "EX_fbbd04aa",
+        "chunk_id": "EX_34674c92",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "Genetic Intervention in Co-Culture",
         "Methodology": "CRISPR knockout in co-culture",
@@ -109,7 +109,7 @@
     },
     {
         "db_id": 13,
-        "chunk_id": "EX_38481098",
+        "chunk_id": "EX_3cfbb94c",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "Cell Interaction Experiments in Mouse Models",
         "Methodology": "Tumor cell & immune cell tracking",
@@ -118,7 +118,7 @@
     },
     {
         "db_id": 14,
-        "chunk_id": "EX_f8b80588",
+        "chunk_id": "EX_ff37928a",
         "Spatiallayer": "Cell-Cell Interactions",
         "Experimental_Design": "Exosome-Mediated Interaction Verification",
         "Methodology": "Exosome isolation, tracking",
@@ -127,7 +127,7 @@
     },
     {
         "db_id": 15,
-        "chunk_id": "EX_b8fc20cd",
+        "chunk_id": "EX_d8dbe887",
         "Spatiallayer": "Cellular Communities",
         "Experimental_Design": "Spatial Transcriptomics + ML Clustering",
         "Methodology": "Louvain clustering",
@@ -136,7 +136,7 @@
     },
     {
         "db_id": 16,
-        "chunk_id": "EX_7ae0202c",
+        "chunk_id": "EX_42b1f1cd",
         "Spatiallayer": "Cellular Communities",
         "Experimental_Design": "3D Tumor-Immune-Stromal Co-Culture Models",
         "Methodology": "3D co-culture systems",
@@ -145,7 +145,7 @@
     },
     {
         "db_id": 17,
-        "chunk_id": "EX_ca4ceb6d",
+        "chunk_id": "EX_050e5a08",
         "Spatiallayer": "Cellular Communities",
         "Experimental_Design": "Organoid Co-Culture Systems",
         "Methodology": "Tumor-immune organoid models",
@@ -154,7 +154,7 @@
     },
     {
         "db_id": 18,
-        "chunk_id": "EX_cab32c77",
+        "chunk_id": "EX_e2a1ccce",
         "Spatiallayer": "Cellular Communities",
         "Experimental_Design": "Immune Niche Reconstruction in Mice",
         "Methodology": "Cell mixture implantation",
@@ -163,7 +163,7 @@
     },
     {
         "db_id": 19,
-        "chunk_id": "EX_64609c05",
+        "chunk_id": "EX_f0a13c1f",
         "Spatiallayer": "Microanatomical Structures",
         "Experimental_Design": "3D Structural and Functional Analysis",
         "Methodology": "Tissue clearing, confocal imaging",
@@ -172,7 +172,7 @@
     },
     {
         "db_id": 20,
-        "chunk_id": "EX_3df0c459",
+        "chunk_id": "EX_d76214b9",
         "Spatiallayer": "Microanatomical Structures",
         "Experimental_Design": "Gene Editing + Immunotherapy",
         "Methodology": "CRISPR knockout + PD-1 inhibitors",

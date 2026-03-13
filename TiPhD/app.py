@@ -1,60 +1,56 @@
 import sys
 import os
-import uuid
-from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
-from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from sqlalchemy import create_engine, distinct
-import pandas as pd
-
-# -------------------------------------------
-# 导入生物学数据库模型 (database.py)
-# -------------------------------------------
-from database import session, SpatialLayer, CellType, SPATIALLAYER_FIELDS, CELLTYPE_FIELDS, format_entry, flatten_entry
-import sys
 import io
-# 强制指定标准输出流为 UTF-8，彻底解决后台 print 中文导致的崩溃
+import uuid
+import base64
+import random
+import string
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
+from flask import session as flask_session # 【重要】起别名，防止与数据库 session 冲突
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_mail import Mail, Message
+from captcha.image import ImageCaptcha # 引入图形验证码库
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
-import random
-from datetime import datetime, timedelta
-from flask_mail import Mail, Message
-from user_db import user_db_session, User, ChatSession, ChatMessage, VerificationCode
-# 原本的 import 往下挪...
-import os
-import uuid
-# ...
-# -------------------------------------------
-# 导入用户系统数据库模型 (user_db.py)
-# -------------------------------------------
+
+load_dotenv()
+
+from sqlalchemy import create_engine, distinct
+import pandas as pd
+from database import session, SpatialLayer, CellType, SPATIALLAYER_FIELDS, CELLTYPE_FIELDS, format_entry, flatten_entry
+
 try:
-    from user_db import user_db_session, User, ChatSession, ChatMessage
+    from user_db import user_db_session, User, ChatSession, ChatMessage, VerificationCode
 except ImportError:
-    print("⚠️ 警告: 无法导入 user_db.py，请确认该文件存在且已运行。")
+    print("⚠️ 警告: 无法导入 user_db.py 或缺少 VerificationCode 表。")
 
 # -------------------------------------------
 # 引入 TiAgent 模块
 # -------------------------------------------
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'TiAgent')))
 try:
-    # 此时的 run_tiagent 签名已更新为: run_tiagent(user_query, history_str)
-    from tiagent_master import run_tiagent
+    # 🌟 新增导入 generate_session_title
+    from tiagent_master import run_tiagent, generate_session_title
 except ImportError:
     print("⚠️ 警告: 无法导入 tiagent_master，智能体对话不可用。请检查路径。")
     run_tiagent = None
 
 app = Flask(__name__)
-app = Flask(__name__)
-# 从环境变量读取，如果没读到就给个默认值
 app.secret_key = os.getenv("SECRET_KEY", "fallback_secret_key")
 
+# ================= 邮箱发送配置 =================
 # ================= 邮箱发送配置 (安全版) =================
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.qq.com')
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 465))
-app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
+app.config['MAIL_USE_SSL'] = True  # 【关键修改】强制写死 True，防止环境变量没读到导致崩溃
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
 mail = Mail(app)
+# =======================================================
 # =======================================================
 
 # -------------------------------------------
@@ -71,49 +67,132 @@ def load_user(user_id):
 # --------------------------------------------
 # 路由：身份验证 (Register / Login / Logout)
 # --------------------------------------------
+# ==========================================================
+# 🌟 升级：注册和登录路由
+# ==========================================================
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        code = request.form.get('code')
         
-        # 检查邮箱是否已被注册
-        existing_user = user_db_session.query(User).filter_by(email=email).first()
-        if existing_user:
-            flash("This email is already registered. Please log in.")
+        # 验证邮件验证码
+        vc = user_db_session.query(VerificationCode).filter_by(email=email).order_by(VerificationCode.id.desc()).first()
+        if not vc or vc.code != code:
+            flash("邮件验证码错误。")
+            return redirect(url_for('register'))
+        if vc.expires_at < datetime.utcnow():
+            flash("邮件验证码已过期，请重新获取。")
             return redirect(url_for('register'))
             
-        # 创建新用户并加密密码
+        if user_db_session.query(User).filter_by(email=email).first():
+            flash("该邮箱已注册。")
+            return redirect(url_for('register'))
+            
         new_user = User(email=email)
         new_user.set_password(password)
         user_db_session.add(new_user)
         user_db_session.commit()
         
-        flash("Registration successful! Please log in.")
+        flash("注册成功！请登录。")
         return redirect(url_for('login'))
+        
     return render_template("register.html")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        password = request.form.get('password')
+        code = request.form.get('code')
         
         user = user_db_session.query(User).filter_by(email=email).first()
-        if user and user.check_password(password):
-            login_user(user)
-            return redirect(url_for('agent_page'))
-            
-        flash("Invalid email or password.")
-    return render_template("login.html")
+        if not user:
+            flash("账号不存在。")
+            return redirect(url_for('login'))
 
+        # 验证邮件验证码
+        vc = user_db_session.query(VerificationCode).filter_by(email=email).order_by(VerificationCode.id.desc()).first()
+        if not vc or vc.code != code:
+            flash("邮件验证码错误。")
+            return redirect(url_for('login'))
+        if vc.expires_at < datetime.utcnow():
+            flash("邮件验证码已过期，请重新获取。")
+            return redirect(url_for('login'))
+
+        # 验证通过，执行登录
+        login_user(user)
+        return redirect(url_for('agent_page'))
+        
+    return render_template("login.html")
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
+# ==========================================================
+# 🌟 新增：图形验证码与邮件发送 API
+# ==========================================================
+@app.route('/api/captcha')
+def get_captcha():
+    """生成 4 位随机图形验证码"""
+    image = ImageCaptcha(width=120, height=40)
+    captcha_text = ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))
+    flask_session['captcha'] = captcha_text # 存入服务器 session
+    data = image.generate(captcha_text)
+    base64_img = base64.b64encode(data.getvalue()).decode('utf-8')
+    return jsonify({'captcha_image': f"data:image/png;base64,{base64_img}"})
 
+@app.route('/api/send_code', methods=['POST'])
+def send_code():
+    """统一的发送邮件接口，支持注册和登录"""
+    data = request.get_json()
+    email = data.get('email')
+    captcha_input = data.get('captcha')
+    action = data.get('action') # 'register' 或 'login'
+
+    if not email or not captcha_input:
+        return jsonify({"error": "Email and Captcha are required."}), 400
+
+    # 1. 校验图形验证码
+    if captcha_input.upper() != flask_session.get('captcha', ''):
+        return jsonify({"error": "图形验证码错误或已过期。"}), 400
+    
+    # 校验完毕后销毁图形验证码，防止重复使用
+    flask_session.pop('captcha', None)
+
+    # 2. 校验用户状态
+    user = user_db_session.query(User).filter_by(email=email).first()
+    if action == 'register' and user:
+        return jsonify({"error": "该邮箱已注册，请直接登录。"}), 400
+    if action == 'login' and not user:
+        return jsonify({"error": "该邮箱未注册，请先注册。"}), 400
+
+    # 3. 生成 6 位邮件验证码
+    code = str(random.randint(100000, 999999))
+    expires = datetime.utcnow() + timedelta(minutes=5)
+    
+    vc = VerificationCode(email=email, code=code, expires_at=expires)
+    user_db_session.add(vc)
+    user_db_session.commit()
+
+    # 4. 发送邮件
+    # 4. 发送邮件
+    try:
+        # 获取你在配置里写的官方邮箱
+        sender_email = app.config['MAIL_USERNAME'] 
+        
+        # 🌟 【关键】：去掉别名元组，直接传入干净的 sender_email 字符串
+        # 换一个看起来像正式通知的标题，避开“测试”、“验证码”等高危词
+        msg = Message("Welcome to TiAgent - Account Verification", sender=sender_email, recipients=[email])
+        msg.body = f"Hello,\n\nThank you for registering at TiAgent.\n\nYour secure code is: {code}\n\nPlease enter this to complete your action. This code is valid for 5 minutes.\n\nBest regards,\nTiAgent Team"
+        
+        mail.send(msg)
+        return jsonify({"message": "邮件发送成功，请查收！"})
+    except Exception as e:
+        print(f"\n❌ 邮件发送致命错误: {str(e)}\n") 
+        return jsonify({"error": f"Debug报错: {str(e)}"}), 500
 # --------------------------------------------
 # 路由：静态与主页面
 # --------------------------------------------
@@ -363,7 +442,7 @@ def search_data(table_name):
 # -------------------------------------------
 # 路由：Download 页面
 # -------------------------------------------
-# -------------------------------------------路由：Download 页面
+
 @app.route("/download")
 def download():
     return render_template("download.html")
@@ -481,10 +560,19 @@ def chat_api():
         answer = run_tiagent(user_query, history_str)
 
         # 4. 持久化本次对话到用户数据库
+        # 4. 持久化本次对话到用户数据库
         new_user_msg = ChatMessage(session_id=session_id, role='user', content=user_query)
         new_agent_msg = ChatMessage(session_id=session_id, role='agent', content=answer)
         user_db_session.add(new_user_msg)
         user_db_session.add(new_agent_msg)
+        
+        # 🌟 5. 自动浓缩标题逻辑 (如果是第一句话，则更新 Session 标题)
+        session_record = user_db_session.query(ChatSession).filter_by(id=session_id).first()
+        if session_record and session_record.title == "New Conversation":
+            # 在后台偷偷调用大模型生成标题
+            new_title = generate_session_title(user_query)
+            session_record.title = new_title
+
         user_db_session.commit()
 
         return jsonify({"answer": answer})
