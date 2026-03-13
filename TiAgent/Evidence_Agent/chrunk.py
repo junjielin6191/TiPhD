@@ -34,7 +34,7 @@ JSON_FILE_NAMES = {
 EMBEDDING_MODEL = 'text-embedding-3-large'
 EMBEDDING_DIMENSION = 3072  
 VECTOR_INDEX_FILE = 'rag_knowledge_index.faiss'
-RAG_DATA_JSON = 'rag_knowledge_data.json'
+RAG_DATA_JSON = './TiAgent/Evidence_Agent/rag_knowledge_data.json'
 
 # ⚠️ 用户提供的配置，覆盖环境变量，用于知识块生成和向量化
 API_KEY_OVERRIDE = 'sk-GBBQQWHSKHU76HFS5tsHmmffzbQi1dnLy5VdnPU6Kp9gtm3n'

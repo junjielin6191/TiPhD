@@ -4,25 +4,34 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSessionList();
 
     // 绑定新会话按钮
-    document.getElementById('new-chat-btn').addEventListener('click', createNewSession);
+    const newChatBtn = document.getElementById('new-chat-btn');
+    if (newChatBtn) {
+        newChatBtn.addEventListener('click', createNewSession);
+    }
     
     // 绑定发送按钮
-    document.getElementById('send-btn').addEventListener('click', sendMessage);
+    const sendBtn = document.getElementById('send-btn');
+    if (sendBtn) {
+        sendBtn.addEventListener('click', sendMessage);
+    }
     
     // 绑定回车键发送 (Shift+Enter 换行)
-    document.getElementById('chat-input').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
-    });
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
 });
 
 // 1. 加载左侧会话列表
 async function loadSessionList() {
     try {
         const response = await fetch('/api/sessions/list');
-        if (!response.ok) return; // 可能未登录
+        if (!response.ok) return; 
         const sessions = await response.json();
         
         const listUl = document.getElementById('session-list');
@@ -31,12 +40,14 @@ async function loadSessionList() {
         sessions.forEach(session => {
             const li = document.createElement('li');
             li.textContent = session.title || "Conversation";
-            li.className = session.id === currentSessionId ? 'active' : '';
+            li.dataset.id = session.id; // 【关键修复1】给每个 li 绑定独立 ID
+            if (session.id === currentSessionId) {
+                li.classList.add('active');
+            }
             li.onclick = () => loadSessionHistory(session.id, li.textContent);
             listUl.appendChild(li);
         });
 
-        // 如果没有会话，自动创建一个；如果有，默认加载第一个
         if (sessions.length === 0) {
             createNewSession();
         } else if (!currentSessionId) {
@@ -55,9 +66,14 @@ async function createNewSession() {
         currentSessionId = data.session_id;
         
         document.getElementById('current-chat-title').textContent = "New Conversation";
-        document.getElementById('chat-box').innerHTML = ''; // 清空聊天区
+        document.getElementById('chat-box').innerHTML = `
+            <div class="welcome-screen" id="welcome-screen">
+                <h2>Welcome to TiAgent</h2>
+                <p>Your intelligent biomedical research assistant.</p>
+            </div>
+        `; // 恢复欢迎卡片
         
-        loadSessionList(); // 刷新左侧列表使其高亮
+        await loadSessionList(); // 刷新左侧列表
     } catch (error) {
         console.error("Failed to create session:", error);
     }
@@ -67,23 +83,39 @@ async function createNewSession() {
 async function loadSessionHistory(sessionId, title) {
     currentSessionId = sessionId;
     document.getElementById('current-chat-title').textContent = title || "Conversation";
-    document.getElementById('welcome-screen')?.remove();
     
-    // 更新左侧高亮
-    document.querySelectorAll('#session-list li').forEach(li => li.classList.remove('active'));
-    event?.currentTarget?.classList.add('active');
+    const welcomeScreen = document.getElementById('welcome-screen');
+    if(welcomeScreen) welcomeScreen.remove();
+    
+    // 【关键修复2】更安全的高亮切换逻辑，去除可能报错的 event 对象
+    document.querySelectorAll('#session-list li').forEach(li => {
+        if (li.dataset.id === sessionId) {
+            li.classList.add('active');
+        } else {
+            li.classList.remove('active');
+        }
+    });
 
     try {
         const response = await fetch(`/api/sessions/${sessionId}`);
         const messages = await response.json();
         
         const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML = ''; // 清空当前
+        chatBox.innerHTML = ''; 
         
-        messages.forEach(msg => {
-            appendMessage(msg.role, msg.content);
-        });
-        scrollToBottom();
+        if(messages.length === 0) {
+            chatBox.innerHTML = `
+                <div class="welcome-screen" id="welcome-screen">
+                    <h2>Welcome to TiAgent</h2>
+                    <p>Your intelligent biomedical research assistant.</p>
+                </div>
+            `;
+        } else {
+            messages.forEach(msg => {
+                appendMessage(msg.role, msg.content);
+            });
+            scrollToBottom();
+        }
     } catch (error) {
         console.error("Failed to load history:", error);
     }
@@ -95,13 +127,13 @@ async function sendMessage() {
     const text = inputEl.value.trim();
     if (!text || !currentSessionId) return;
 
-    // 清空输入框并显示用户消息
     inputEl.value = '';
-    document.getElementById('welcome-screen')?.remove();
+    const welcomeScreen = document.getElementById('welcome-screen');
+    if(welcomeScreen) welcomeScreen.remove();
+    
     appendMessage('user', text);
     scrollToBottom();
 
-    // 显示 Agent 正在思考的提示
     const loadingId = appendMessage('agent', '<i class="fas fa-spinner fa-spin"></i> Thinking...', true);
     scrollToBottom();
 
@@ -114,7 +146,6 @@ async function sendMessage() {
         
         const data = await response.json();
         
-        // 移除 loading，填入真实回复
         document.getElementById(loadingId).remove();
         if (data.error) {
             appendMessage('agent', `❌ Error: ${data.error}`);
@@ -123,7 +154,6 @@ async function sendMessage() {
         }
         scrollToBottom();
         
-        // 如果这是这个新会话的第一句话，重新加载一下左侧列表（后端如果自动改了标题的话）
         loadSessionList(); 
     } catch (error) {
         document.getElementById(loadingId).remove();
@@ -135,9 +165,8 @@ async function sendMessage() {
 function appendMessage(role, content, isHtml = false) {
     const chatBox = document.getElementById('chat-box');
     const msgDiv = document.createElement('div');
-    msgDiv.className = `chat-message ${role}`; // 'chat-message user' 或 'chat-message agent'
+    msgDiv.className = `chat-message ${role}`; 
     
-    // 简单的 Markdown 处理 (将换行转为 <br>)
     let displayContent = content;
     if (!isHtml) {
         displayContent = content.replace(/\n/g, '<br>');

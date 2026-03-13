@@ -12,9 +12,9 @@ except ImportError:
 
 # --- Configuration Definition (Must be consistent) ---
 EMBEDDING_MODEL = 'text-embedding-3-large'
-VECTOR_INDEX_FILE = 'rag_knowledge_index.faiss'
-RAG_DATA_JSON = 'rag_knowledge_data.json'
-ID_MAP_FILE = 'faiss_id_map.json'
+VECTOR_INDEX_FILE = './TiAgent/Evidence_Agent/rag_knowledge_index.faiss'
+RAG_DATA_JSON = './TiAgent/Evidence_Agent/rag_knowledge_data.json'
+ID_MAP_FILE = './TiAgent/Evidence_Agent/faiss_id_map.json'
 REASONING_MODEL = "gpt-4o"  # Reasoning/Validation Agent model
 
 

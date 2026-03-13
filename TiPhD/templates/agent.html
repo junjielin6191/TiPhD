@@ -3,14 +3,15 @@
 {% block title %}TiAgent - Research Assistant{% endblock %}
 
 {% block content %}
+
+{% if current_user.is_authenticated %}
 <div class="agent-layout">
     <div class="agent-sidebar">
         <button id="new-chat-btn" class="new-chat-btn">
             <i class="fas fa-plus"></i> New Chat
         </button>
         <div class="session-list-container">
-            <ul id="session-list" class="session-list">
-                </ul>
+            <ul id="session-list" class="session-list"></ul>
         </div>
     </div>
 
@@ -18,17 +19,15 @@
         <div class="chat-header">
             <h3 id="current-chat-title">New Conversation</h3>
         </div>
-        
         <div class="chat-box" id="chat-box">
             <div class="welcome-screen" id="welcome-screen">
                 <h2>Welcome to TiAgent</h2>
                 <p>Your intelligent biomedical research assistant.</p>
             </div>
         </div>
-
         <div class="chat-input-area">
             <div class="input-wrapper">
-                <textarea id="chat-input" placeholder="Ask about tumor microenvironment, spatial localization, or tools..." rows="1"></textarea>
+                <textarea id="chat-input" placeholder="Ask about tumor microenvironment..." rows="1"></textarea>
                 <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -38,4 +37,22 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/agent.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <script src="{{ url_for('static', filename='js/agent.js') }}"></script>
+
+{% else %}
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100vh - 80px); background-color: #f9fafb;">
+    <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; max-width: 400px;">
+        <i class="fas fa-robot" style="font-size: 50px; color: #10a37f; margin-bottom: 20px;"></i>
+        <h2 style="margin-bottom: 15px; color: #333;">TiAgent Access Locked</h2>
+        <p style="color: #6b7280; margin-bottom: 30px; line-height: 1.5;">
+            To provide you with a personalized and secure research experience, please log in to access the AI assistant.
+        </p>
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <a href="/login" style="padding: 10px 24px; background-color: #007bff; color: white; text-decoration: none; border-radius: 6px; font-weight: 500;">Log In</a>
+            <a href="/register" style="padding: 10px 24px; background-color: #fff; color: #007bff; border: 1px solid #007bff; text-decoration: none; border-radius: 6px; font-weight: 500;">Sign Up</a>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endif %}
+
 {% endblock %}

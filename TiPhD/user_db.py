@@ -41,6 +41,17 @@ class ChatMessage(UserBase):
     role = Column(String(10)) 
     content = Column(Text)
     timestamp = Column(DateTime, default=datetime.utcnow)
+# ... [保留原有的 User, ChatSession, ChatMessage 表] ...
+
+class VerificationCode(UserBase):
+    __tablename__ = 'verification_codes'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String(120), nullable=False)
+    code = Column(String(6), nullable=False)
+    expires_at = Column(DateTime, nullable=False)
+
+# 确保这行代码在最底下，用于自动创建新表
+UserBase.metadata.create_all(user_engine)
 
 # 自动创建最新的表结构
 UserBase.metadata.create_all(user_engine)
