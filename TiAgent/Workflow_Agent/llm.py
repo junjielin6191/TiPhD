@@ -3,7 +3,7 @@ import os
 from typing import TYPE_CHECKING, Literal, Optional, Union, List 
 
 from langchain_core.language_models.chat_models import BaseChatModel
-
+from Workflow_Agent.config import default_config
 # 导入必要的 LangChain 组件
 try:
     from langchain_openai import ChatOpenAI
@@ -14,7 +14,6 @@ except ImportError:
     )
 
 # 定义您的固定配置
-CUSTOM_MODEL = "gpt-4o"
 CUSTOM_BASE_URL = "https://api.bianxie.ai/v1"
 # ⚠️ 用户提供的配置，覆盖环境变量，用于知识块生成和向量化
 BIANXIE_AI_API_KEY = 'sk-GBBQQWHSKHU76HFS5tsHmmffzbQi1dnLy5VdnPU6Kp9gtm3n'
@@ -38,10 +37,10 @@ def get_llm(
 ) -> BaseChatModel:
     """
     Get a language model instance configured for the custom 'https://api.bianxie.ai/v1' service
-    running the 'gpt-4o' model.
+    running the model.
 
     Args:
-        model (str): The model name to use (defaults to 'gpt-4o').
+        model (str): The model name to use .
         temperature (float): Temperature setting for generation.
         stop_sequences (list): Sequences that will stop generation.
         api_key (str): The API key for the custom service (REQUIRED).
@@ -66,7 +65,7 @@ def get_llm(
     # --- 2. 创建 ChatOpenAI 实例 ---
     
     llm = ChatOpenAI(
-        model=model,
+        model=default_config.llm,
         temperature=temperature,
         stop_sequences=stop_sequences,
         base_url=base_url,

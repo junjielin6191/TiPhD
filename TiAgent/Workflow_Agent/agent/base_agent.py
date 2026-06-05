@@ -143,7 +143,7 @@ class BaseAgent(ABC):
                 (
                     "system",
                     (
-                        "You are evaluateGPT, tasked with extract and parse the task output based on the history of an agent. "
+                        "You are evaluate agent, tasked with extract and parse the task output based on the history of an agent. "
                         "Review the entire history of messages provided. "
                         "Here is the task output requirement: \n"
                         f"'{task_intention.replace('{', '{{').replace('}', '}}')}'.\n"

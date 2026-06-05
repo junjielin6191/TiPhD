@@ -2,10 +2,10 @@ import json
 import sys
 from openai import OpenAI
 from typing import Dict, List, Any
-
+from Workflow_Agent.config import default_config  # 导入配置
 # --- Configuration Definition ---
 # Use a powerful model for routing and intent recognition
-ORCHESTRATOR_MODEL = "gpt-4o" 
+ORCHESTRATOR_MODEL = default_config.llm
 
 # Knowledge Base Descriptions, used to guide the LLM for routing decisions. MUST BE IN ENGLISH.
 # Evidence_Agent/orchestrator.py

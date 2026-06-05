@@ -5,6 +5,7 @@ import sys
 import time
 from openai import OpenAI
 from typing import Dict, List, Any, Tuple 
+from Workflow_Agent.config import default_config
 # 尝试导入 faiss
 try:
     import faiss
@@ -30,7 +31,7 @@ RAG_DATA_JSON = str(BASE_DIR / 'rag_knowledge_data.json')
 ID_MAP_FILE = str(BASE_DIR / 'faiss_id_map.json')
 EMBEDDING_MODEL = 'text-embedding-3-large'
 
-REASONING_MODEL = "gpt-4o" # Reasoning Agent and Translation Agent Model
+REASONING_MODEL = default_config.llm # Reasoning Agent and Translation Agent Model
 
 # 🛠️ User provided API Configuration
 API_KEY = "sk-GBBQQWHSKHU76HFS5tsHmmffzbQi1dnLy5VdnPU6Kp9gtm3n"

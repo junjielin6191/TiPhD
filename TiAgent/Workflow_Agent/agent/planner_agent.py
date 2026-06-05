@@ -5,14 +5,14 @@ from typing import Any, Dict, List, Tuple, Optional
 from langchain_core.prompts import ChatPromptTemplate
 from Workflow_Agent.agent.base_agent import base_agent 
 from Workflow_Agent.llm import get_llm 
-
+from Workflow_Agent.config import default_config
 class PlannerAgent(base_agent):
     """
     Planner Agent: TiAgent 的核心大脑。
     负责生成科学严谨的、干湿闭环的研究方案。
     """
 
-    def __init__(self, llm="gpt-4o", cheap_llm=None, temperature=0.7, api_key: Optional[str] = None):
+    def __init__(self, llm=default_config.llm, cheap_llm=None, temperature=0.7, api_key: Optional[str] = None):
         super().__init__(llm, cheap_llm, temperature, api_key=api_key) 
         self.configure()
 

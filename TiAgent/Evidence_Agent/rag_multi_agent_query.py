@@ -3,6 +3,7 @@ import json
 import sys
 from openai import OpenAI
 from typing import Dict, List, Any
+from Workflow_Agent.config import default_config  # 导入配置
 # Try importing faiss
 try:
     import faiss
@@ -15,7 +16,7 @@ EMBEDDING_MODEL = 'text-embedding-3-large'
 VECTOR_INDEX_FILE = './TiAgent/Evidence_Agent/rag_knowledge_index.faiss'
 RAG_DATA_JSON = './TiAgent/Evidence_Agent/rag_knowledge_data.json'
 ID_MAP_FILE = './TiAgent/Evidence_Agent/faiss_id_map.json'
-REASONING_MODEL = "gpt-4o"  # Reasoning/Validation Agent model
+REASONING_MODEL = default_config.llm  # Reasoning/Validation Agent model
 
 
 # --- Core Function B: Expert Retrieval Agent (Spatial Agent, Celltype Agent, etc.) ---

@@ -11,15 +11,14 @@ from Workflow_Agent.llm import get_llm
 from Workflow_Agent.know_how.loader import KnowHowLoader
 from Workflow_Agent.model.retriever import ToolRetriever
 from Workflow_Agent.agent.planner_agent import PlannerAgent
-
+from Workflow_Agent.config import default_config  # 导入配置
 # --- 配置 ---
-RETRIEVAL_MODEL = "gpt-4o" 
-PLANNER_MODEL = "gpt-4o" 
-TEMPERATURE = 0.0
+
 
 # 1. 获取 API KEY (使用硬编码或环境变量)
 BIANXIE_AI_API_KEY = os.getenv("BIANXIE_AI_API_KEY", "sk-GBBQQWHSKHU76HFS5tsHmmffzbQi1dnLy5VdnPU6Kp9gtm3n")
 API_BASE = "https://api.bianxie.ai/v1" 
+TEMPERATURE=default_config.temperature
 
 def _prepare_resources() -> Dict[str, List[Any]]:
     """
@@ -85,8 +84,8 @@ def run_workflow_agent(user_query: str) -> str:
         print(f"   - 成功加载 {total_resources} 个资源。")
 
         # 2. 初始化 LLM 实例
-        print(f"🧠 LLM初始化: 模型 {PLANNER_MODEL}。")
-        retriever_llm = get_llm(model=RETRIEVAL_MODEL, temperature=TEMPERATURE, api_key=BIANXIE_AI_API_KEY)
+        print(f"🧠 LLM初始化: 模型 {default_config.retrieval_model}。")
+        retriever_llm = get_llm(model=default_config.retrieval_model, temperature=TEMPERATURE, api_key=BIANXIE_AI_API_KEY)
 
         # 3. 运行动态知识检索 (ToolRetriever)
         print("\n🔍 2. 正在执行动态知识检索 (Filtering)...")
@@ -100,7 +99,7 @@ def run_workflow_agent(user_query: str) -> str:
         # 4. 运行 Agent 规划 (PlannerAgent)
         print("\n📝 3. 正在生成结构化分析计划...")
         planner = PlannerAgent(
-            llm=PLANNER_MODEL, 
+            llm=default_config.planner_model, 
             temperature=TEMPERATURE,
             api_key=BIANXIE_AI_API_KEY 
         )
